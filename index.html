@@ -94,7 +94,11 @@ h2 em{font-style:normal;font-weight:500;color:var(--accent)}
 @keyframes rise{to{transform:none}}
 .hero .lead{margin:18px 0 28px;max-width:52ch}
 .hero .lead strong{font-weight:500;color:var(--ink)}
-.cta{display:flex;flex-wrap:wrap;gap:14px}
+.cta{display:flex;flex-wrap:nowrap;gap:clamp(8px,1.4vw,14px)}
+.cta .btn{flex:0 0 auto;padding-inline:clamp(14px,2vw,28px)}
+.cta .btn span:not(.ico){white-space:nowrap}
+@media(max-width:900px){.cta{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-inline:calc(-1*clamp(20px,5vw,56px));padding-inline:clamp(20px,5vw,56px);padding-bottom:2px}
+.cta::-webkit-scrollbar{display:none}}
 .stats{display:flex;flex-wrap:nowrap;gap:clamp(14px,3vw,56px);margin-top:clamp(24px,3vw,36px);padding-top:22px;border-top:1px solid var(--line)}
 @media(max-width:560px){.stats{flex-wrap:wrap;row-gap:28px}}
 .stat b{display:block;font-size:clamp(32px,3.4vw,44px);font-weight:200;letter-spacing:-.03em;line-height:1;color:var(--deep)}
@@ -451,7 +455,6 @@ footer.site .btn-round{width:46px;height:46px}
   .seg{width:100%;justify-content:space-between}.seg button{padding:10px 14px;flex:1}
   .scale span{font-size:11.5px}
   .btn{height:50px}
-  .cta .btn{flex:1 1 auto;justify-content:space-between}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
