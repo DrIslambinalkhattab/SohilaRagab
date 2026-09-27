@@ -19,6 +19,7 @@
   --bg:#F7FAFD; --bg2:#EEF4FA; --soft:#E6F0F9; --surface:#FFFFFF;
   --ink:#1E2B3A; --ink2:#4A5B6E; --mute:#8595A8; --line:#E3EBF3;
   --powder:#CFE2F3; --powder2:#A9C9E6; --accent:#4F86B8; --deep:#24496E;
+  --warm:#C99A5B; --warm-soft:#F4E9D8;
   --sh1:0 1px 1px rgba(31,62,99,.03),0 2px 4px rgba(31,62,99,.03),0 12px 32px -12px rgba(31,62,99,.12);
   --sh2:0 1px 2px rgba(31,62,99,.04),0 8px 16px -6px rgba(31,62,99,.06),0 40px 80px -28px rgba(31,62,99,.22);
   --hair:rgba(31,62,99,.08);
@@ -37,7 +38,7 @@ ul{list-style:none}
 ::selection{background:var(--powder);color:var(--deep)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:999px}
 .wrap{width:100%;max-width:calc(var(--wrap) + 2*clamp(20px,5vw,56px));margin-inline:auto;padding-inline:clamp(20px,5vw,56px)}
-section{position:relative;padding:clamp(56px,7vw,96px) 0;scroll-margin-top:20px}
+section{position:relative;padding:clamp(56px,7vw,96px) 0;scroll-margin-top:104px}
 
 .progress{position:fixed;inset:0 0 auto 0;height:2px;z-index:100;background:transparent}
 .progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .1s linear}
@@ -78,14 +79,14 @@ h2 em{font-style:normal;font-weight:500;color:var(--accent)}
 .links a.active{background:var(--soft);color:var(--deep)}
 .menu-btn{display:none;width:44px;height:44px;border-radius:50%;background:var(--soft);color:var(--deep);place-items:center}
 
-.hero{min-height:100svh;display:flex;align-items:center;padding:clamp(96px,14vh,128px) 0 clamp(28px,5vh,48px);overflow:hidden}
+.hero{min-height:100svh;display:flex;align-items:center;padding:clamp(84px,11vh,108px) 0 clamp(24px,4vh,40px);overflow:hidden}
 .hero::before{content:"";position:absolute;width:min(900px,90vw);aspect-ratio:1;right:-18%;top:-22%;border-radius:50%;background:radial-gradient(circle,rgba(207,226,243,.75) 0%,rgba(207,226,243,0) 68%);pointer-events:none}
 .hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:center;gap:clamp(24px,4vw,64px)}
 .pill-tag{display:inline-flex;align-items:center;gap:10px;padding:8px 18px 8px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh1);font-size:14px;font-weight:500;color:var(--ink2)}
 .pill-tag i{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(79,134,184,.5);animation:pulse 2.4s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 10px rgba(79,134,184,0)}100%{box-shadow:0 0 0 0 rgba(79,134,184,0)}}
 .hero-name{margin:20px 0 10px;font-size:15px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
-.hero h1{font-size:clamp(30px,4vw,54px);font-weight:200;line-height:1.1;letter-spacing:-.03em;color:var(--ink)}
+.hero h1{font-size:clamp(30px,4vw,54px);font-weight:200;line-height:1.06;letter-spacing:-.03em;color:var(--ink)}
 .hero h1 .ln{display:block;overflow:hidden;padding-bottom:.08em}
 .hero h1 .ln>span{display:inline-block;transform:translateY(110%);animation:rise 1.2s var(--ease) forwards}
 .hero h1 .ln:nth-child(2)>span{animation-delay:.12s}.hero h1 .ln:nth-child(3)>span{animation-delay:.24s}
@@ -97,6 +98,7 @@ h2 em{font-style:normal;font-weight:500;color:var(--accent)}
 .stats{display:flex;flex-wrap:nowrap;gap:clamp(14px,3vw,56px);margin-top:clamp(24px,3vw,36px);padding-top:22px;border-top:1px solid var(--line)}
 @media(max-width:560px){.stats{flex-wrap:wrap;row-gap:28px}}
 .stat b{display:block;font-size:clamp(32px,3.4vw,44px);font-weight:200;letter-spacing:-.03em;line-height:1;color:var(--deep)}
+.stat b.stat-wide{font-size:clamp(26px,2.75vw,35px)}
 .stat span{display:block;margin-top:10px;font-size:13.5px;color:var(--mute);font-weight:500}
 .fade-up{opacity:0;transform:translateY(22px);animation:fadeup 1.1s var(--ease) forwards}
 @keyframes fadeup{to{opacity:1;transform:none}}
@@ -138,7 +140,7 @@ h2 em{font-style:normal;font-weight:500;color:var(--accent)}
 .voice .orb-word{margin:0;font-size:19px;font-weight:400;letter-spacing:0}
 .voice .orb-sub{font-size:10.5px;letter-spacing:.22em}
 .badge-live{position:absolute;top:8%;right:8%;z-index:3;display:flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 0 0 1px var(--hair) inset,var(--sh1);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--deep)}
-.badge-live::before{content:"";width:6px;height:6px;border-radius:50%;background:#7DBE9B;box-shadow:0 0 0 0 rgba(125,190,155,.6);animation:pulse 2.2s infinite}
+.badge-live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--warm);box-shadow:0 0 0 0 rgba(201,154,91,.6);animation:pulse 2.2s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 8px rgba(125,190,155,0)}100%{box-shadow:0 0 0 0 rgba(125,190,155,0)}}
 .now{bottom:-15%}
 .chip.c3{top:44%}.chip.c4{top:64%}
@@ -265,7 +267,7 @@ h2 em{font-style:normal;font-weight:500;color:var(--accent)}
 .fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .fcard{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:34px;min-height:260px;padding:34px;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh1);transition:transform .6s var(--ease),box-shadow .6s var(--ease)}
 .fcard:hover{transform:translateY(-6px);box-shadow:var(--sh2)}
-.fcard>i{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--soft);color:var(--accent);font-size:16px}
+.fcard>i{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--warm-soft);color:var(--warm);font-size:16px}
 .fcard blockquote{font-size:19px;font-weight:300;line-height:1.6;color:var(--ink)}
 .fcard footer b{display:block;font-weight:500;font-size:15px}
 .fcard footer span{font-size:13.5px;color:var(--mute)}
@@ -514,10 +516,10 @@ h2{letter-spacing:-.028em;line-height:1.06;text-wrap:balance}
 @keyframes cue{60%,100%{top:100%}}
 @media (max-width:900px){.scroll-cue{display:none}}
 
-.marquee{position:relative;overflow:hidden;padding:26px 0;border-block:1px solid var(--line);background:linear-gradient(180deg,var(--surface),var(--bg));-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.marquee{position:relative;z-index:1;overflow:hidden;margin-top:44px;padding:22px 0;border-block:1px solid var(--line);background:linear-gradient(180deg,var(--surface),var(--bg));-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
 .marquee-track{display:flex;width:max-content;animation:marq 48s linear infinite}
 .marquee:hover .marquee-track{animation-play-state:paused}
-.marquee-track span{display:inline-flex;align-items:center;gap:36px;padding-right:36px;font-size:clamp(20px,2.2vw,30px);font-weight:200;letter-spacing:-.01em;color:var(--ink2);white-space:nowrap}
+.marquee-track span{display:inline-flex;align-items:center;gap:36px;padding-right:36px;font-size:clamp(15px,1.3vw,20px);font-weight:200;letter-spacing:-.01em;color:var(--ink2);white-space:nowrap}
 .marquee-track span::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--powder2)}
 .marquee-track span:nth-child(3n+2){color:var(--accent);font-weight:300}
 @keyframes marq{to{transform:translateX(-50%)}}
@@ -622,7 +624,7 @@ footer.site{border-top:1px solid var(--line);margin-top:34px}
 .ring{display:none}
 .v-frame-line{position:absolute;pointer-events:none;border:1px solid rgba(79,134,184,.22);border-radius:200px 200px 34px 34px}
 .v-fl1{inset:-14px -14px -14px -14px;border-style:solid;opacity:.9;animation:vfade 1.6s var(--ease) both .5s}
-.v-fl2{inset:-30px;border-style:dashed;border-color:rgba(79,134,184,.14);animation:vfade 1.8s var(--ease) both .7s}
+.v-fl2{display:none}
 @keyframes vfade{from{opacity:0;transform:scale(.96)}}
 .portrait{position:absolute;inset:0;margin:0;border-radius:200px 200px 28px 28px;overflow:hidden;isolation:isolate;background:linear-gradient(160deg,#EAF2FA,#D5E6F5);box-shadow:0 0 0 6px rgba(255,255,255,.85),0 0 0 7px var(--hair),0 2px 4px rgba(31,62,99,.05),0 28px 50px -18px rgba(31,62,99,.28),0 70px 110px -40px rgba(31,62,99,.34)}
 .portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:46% 30%;transform:scale(1.02);filter:saturate(.94) contrast(1.03) brightness(1.02);transition:transform 1.6s var(--ease)}
@@ -634,8 +636,8 @@ footer.site{border-top:1px solid var(--line);margin-top:34px}
 .p-cap{position:absolute;left:14px;right:14px;bottom:14px;max-width:calc(100% - 28px);z-index:4;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 16px 14px 18px;border-radius:18px;background:rgba(255,255,255,.82);backdrop-filter:blur(18px) saturate(1.5);-webkit-backdrop-filter:blur(18px) saturate(1.5);box-shadow:0 0 0 1px rgba(255,255,255,.7) inset,0 0 0 1px var(--hair),0 18px 30px -16px rgba(22,44,72,.35)}
 .p-cap-l{display:grid;gap:3px;min-width:0;text-align:left}
 .p-cap-l b{font-size:14.5px;font-weight:500;letter-spacing:-.005em;color:var(--ink);line-height:1.25}
-.p-now{display:flex!important;align-items:center;gap:7px;font-size:10px!important;letter-spacing:.16em!important;text-transform:uppercase;color:var(--mute)}
-.p-now::before{content:"";width:6px;height:6px;border-radius:50%;background:#7DBE9B;box-shadow:0 0 0 0 rgba(125,190,155,.55);animation:pulse 2.2s infinite}
+.p-now{display:flex!important;align-items:center;gap:7px;font-size:10px!important;letter-spacing:.16em!important;text-transform:uppercase;color:var(--warm);font-weight:600}
+.p-now::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--warm);box-shadow:0 0 0 0 rgba(201,154,91,.55);animation:pulse 2.2s infinite}
 .p-cap-l small{font-size:11.5px;color:var(--mute);font-weight:500;letter-spacing:.02em;line-height:1.35}
 .p-cap .voice{position:static;transform:none;padding:0;gap:0;background:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;flex:none}
 .p-cap .wave{height:30px;gap:3px}
@@ -686,22 +688,22 @@ footer.site{border-top:1px solid var(--line);margin-top:34px}
     <div>
       <span class="pill-tag fade-up" style="animation-delay:.1s"><i></i>German trainer · 8 years · Cairo</span>
       <h1 aria-label="German that works in the room — training, assessment, and trainer development.">
-        <span class="ln"><span>German that works in the room</span></span>
-        <span class="ln"><span>— training, <em>assessment</em>,</span></span>
+        <span class="ln"><span>German that works in the room —</span></span>
+        <span class="ln"><span>training, <em>assessment</em>,</span></span>
         <span class="ln"><span>and trainer development.</span></span>
       </h1>
-      <p class="lead fade-up" style="animation-delay:.5s">I help people and teams communicate in German — <strong>and I can prove it</strong>, through structured speaking assessment, hands-on training and trainer development.</p>
-      <p class="fade-up" style="animation-delay:.55s;font-size:14px;font-weight:500;color:var(--ink2);letter-spacing:.01em">Training · Speaking assessment · Communication · Trainer development</p>
+      <p class="lead fade-up" style="animation-delay:.5s">I help people and teams communicate in German — <a href="#assessment" style="font-weight:500;color:var(--deep);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--powder2)">and I can prove it</a>, through structured speaking assessment, hands-on training and trainer development.</p>
+      <p class="fade-up" style="animation-delay:.55s;margin-bottom:28px;font-size:14px;font-weight:500;color:var(--ink2);letter-spacing:.01em">Training · Speaking assessment · Communication · Trainer development</p>
       <div class="cta fade-up" style="animation-delay:.62s">
         <a href="#contact" class="btn btn-primary" data-magnetic>Book an Assessment <span class="ico"><i class="fa-solid fa-arrow-right"></i></span></a>
         <a href="#journey" class="btn btn-ghost" data-magnetic>Training Programs <span class="ico"><i class="fa-solid fa-chalkboard-user"></i></span></a>
       </div>
-      <p class="fade-up" style="animation-delay:.7s;margin-top:24px;font-size:13.5px;color:var(--mute);font-weight:500">8 years · A1–C1 · Goethe / ÖSD prep · 500+ learners · corporate teams</p>
+      <p class="fade-up" style="animation-delay:.7s;margin-top:24px;font-size:13.5px;color:var(--mute);font-weight:500">A1–C1 exam-style preparation · 350+ learners · corporate teams</p>
       <div class="stats fade-up" style="animation-delay:.78s">
-        <div class="stat"><b data-count="5" data-suffix="+">5+</b><span>Years in language training</span></div>
-        <div class="stat"><b data-count="8" data-suffix="+">8+</b><span>Years of active German</span></div>
-        <div class="stat"><b data-count="3">3</b><span>Roles, one progression</span></div>
-        <div class="stat"><b data-count="350" data-suffix="+">350+</b><span>Students trained</span></div>
+        <div class="stat"><b data-count="8" data-suffix="+">8+</b><span>Years with German</span></div>
+        <div class="stat"><b data-count="5" data-suffix="+">5+</b><span>Years training &amp; assessing</span></div>
+        <div class="stat"><b>A1–C1</b><span>Levels assessed</span></div>
+        <div class="stat"><b class="stat-wide" data-count="350" data-suffix="+">350+</b><span>Students trained</span></div>
       </div>
     </div>
 
@@ -729,18 +731,18 @@ footer.site{border-top:1px solid var(--line);margin-top:34px}
   <div class="wrap about-grid">
     <div>
       <span class="eyebrow reveal">01 — About</span>
-      <p class="statement reveal" style="--d:.08s;margin-top:28px">A <em>confident German speaker</em> with 8 years of language experience — communicating clearly, guiding with purpose, and adapting to every individual.</p>
+      <p class="statement reveal" style="--d:.08s;margin-top:28px">Eight years with <em>German</em> — from academic study to assessing how others speak it.</p>
       <div class="about-copy">
-        <p class="lead reveal" style="--d:.14s">8 years of experience using the German language, with over 5 years of professional experience in spoken communication. Strong ability to explain and clarify information clearly, provide guidance and directions, and communicate effectively with people from different backgrounds.</p>
-        <p class="lead reveal" style="--d:.2s">Skilled in active listening, understanding individual needs, and delivering clear, professional, and supportive communication. Fluent in Arabic and German, with strong English communication skills and basic Turkish (A2) — professional, adaptable, and confident in direct, people-focused communication.</p>
+        <p class="lead reveal" style="--d:.14s">Eight years with German: four years of academic study — BA in European Languages &amp; Literature (German), Al-Azhar University — and five years training, assessing, and coaching instructors. Strong ability to explain and clarify information clearly, provide guidance and directions, and communicate effectively with people from different backgrounds.</p>
+        <p class="lead reveal" style="--d:.2s">I design and run speaking assessments and placement testing at Gib Gas Egypt, and coach instructors on assessment consistency.</p>
       </div>
     </div>
     <div class="reveal" style="--d:.15s">
       <p class="lang-title">Languages</p>
       <div class="langs">
         <div class="lang"><div><b>العربية</b><small>Arabic</small></div><span>Native</span></div>
-        <div class="lang"><div><b>Deutsch</b><small>German</small></div><span>C1 · Fluent</span></div>
-        <div class="lang"><div><b>English</b><small>English</small></div><span>B2 · Strong communication</span></div>
+        <div class="lang"><div><b>Deutsch</b><small>German</small></div><span>C1 · Trainer &amp; Assessor</span></div>
+        <div class="lang"><div><b>English</b><small>English</small></div><span>B2</span></div>
         <div class="lang"><div><b>Türkçe</b><small>Turkish</small></div><span>A2 · Basic</span></div>
       </div>
     </div>
@@ -803,7 +805,7 @@ footer.site{border-top:1px solid var(--line);margin-top:34px}
   </div>
 </section>
 
-<section id="assessment" class="assess">
+<section id="assessment" class="assess" style="scroll-margin-top:130px">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow reveal">04 — Assessment &amp; Placement</span>
@@ -1483,7 +1485,8 @@ footer.site{border-top:1px solid var(--line);margin-top:34px}
     if (id.length < 2) return;
     const t = $(id); if (!t) return;
     e.preventDefault();
-    const y = id === '#top' ? 0 : t.getBoundingClientRect().top + scrollY - 6;
+    const navOffset = (document.querySelector('.nav')?.offsetHeight || 60) + 34;
+    const y = id === '#top' ? 0 : t.getBoundingClientRect().top + scrollY - navOffset;
     scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
     history.replaceState(null, '', id);
   }));
