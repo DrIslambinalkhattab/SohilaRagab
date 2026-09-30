@@ -855,6 +855,26 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
 @media(max-width:640px){.fbf-row{grid-template-columns:1fr}.fbf-foot{flex-direction:column;align-items:stretch}.fbf-foot .btn{justify-content:space-between}}
 @media(prefers-reduced-motion:reduce){.fbf-done-ico{animation:none}}
 
+
+/* ===== Feedback reel + modal: robust text handling ===== */
+.freel{padding-block:14px;margin-block:-14px}
+.freel-track{align-items:stretch;will-change:transform}
+.fchip{box-sizing:border-box;flex:0 0 clamp(270px,26vw,340px);width:clamp(270px,26vw,340px);min-width:0;max-width:100%;overflow:hidden;justify-content:space-between;gap:18px;padding:26px 28px 24px;min-height:210px}
+.fchip>i{flex:none}
+.fchip p,.fchip footer,.fchip footer b,.fchip footer span{min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:break-word;hyphens:auto;unicode-bidi:plaintext}
+.fchip p{flex:1;display:block}
+.fchip footer{padding-top:16px;border-top:1px solid var(--line)}
+.fchip footer b,.fchip footer span{display:block;white-space:normal}
+.fchip footer span{margin-top:2px;line-height:1.45}
+.fq-more{display:inline-block;margin-top:6px;margin-inline-start:0;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px;line-height:1.3}
+.fq-modal{overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain}
+.fq-text{max-width:100%;overflow-wrap:anywhere;word-break:break-word;white-space:pre-line;unicode-bidi:plaintext}
+.fq-foot{flex-wrap:wrap;min-width:0}
+.fq-foot>div{min-width:0;flex:1 1 160px}
+.fq-foot b,.fq-foot span{overflow-wrap:anywhere;word-break:break-word}
+.fq-foot>div span{display:block;margin-top:2px}
+@media(max-width:560px){.fchip{flex-basis:264px;width:264px;padding:22px}}
+
 #feedback.is-empty .fnote{margin-top:8px;display:flex;flex-direction:column;align-items:flex-start;gap:20px}
 #feedback.is-empty .fnote p{font-style:normal}
 
@@ -1149,7 +1169,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
   <div class="fq-modal">
     <button type="button" class="fq-close" id="fqCloseBtn" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
     <span class="fq-mark"><i class="fa-solid fa-quote-left"></i></span>
-    <p class="fq-text" id="fqText"></p>
+    <p class="fq-text" id="fqText" dir="auto"></p>
     <div class="fq-foot">
       <span class="fq-avatar" id="fqAvatar"></span>
       <div><b id="fqName"></b><span id="fqRole"></span></div>
@@ -1479,9 +1499,9 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
     const items = live.map(f => ({ quote: String(f.quote), name: String(f.name), role: [f.role, f.org].filter(Boolean).join(' · '), icon: f.icon || 'fa-quote-left', cat: f.cat || f.category || '' }));
     const chip = (f, i, tab) => {
       const q = f.quote, head = `<div class="fchip"><i class="fa-solid ${esc(f.icon)}" aria-hidden="true"></i>`, foot = `<footer><b>${esc(f.name)}</b>${f.role ? `<span>${esc(f.role)}</span>` : ''}</footer></div>`;
-      if (q.length <= TRUNC_AT) return `${head}<p>${esc(q)}</p>${foot}`;
+      if (q.length <= TRUNC_AT) return `${head}<p dir="auto">${esc(q)}</p>${foot}`;
       let cut = q.lastIndexOf(' ', TRUNC_AT); if (cut < 0) cut = TRUNC_AT;
-      return `${head}<p>${esc(q.slice(0, cut))}&hellip; <button type="button" class="fq-more" data-fi="${i}"${tab ? ' tabindex="-1"' : ''} aria-haspopup="dialog" aria-controls="fqOverlay">Read full feedback</button></p>${foot}`;
+      return `${head}<p dir="auto">${esc(q.slice(0, cut))}&hellip; <button type="button" class="fq-more" data-fi="${i}"${tab ? ' tabindex="-1"' : ''} aria-haspopup="dialog" aria-controls="fqOverlay">Read full feedback</button></p>${foot}`;
     };
     const reps = Math.max(1, Math.ceil(8 / items.length));
     const half = items.length * reps;
