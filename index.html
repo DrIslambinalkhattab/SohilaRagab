@@ -1218,7 +1218,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
           </div>
         </div>
 
-        <form class="cform" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+        <form class="cform" id="contactForm" action="https://script.google.com/macros/s/AKfycbwhe62uXb370OxzUdaCjCMcXShyYIhVT-TieXQ3KzJ_LVHnj7CXsE7ffuC7KS8nWNYlHw/exec" method="POST" novalidate>
           <div class="cform-inner" style="display:grid;gap:20px">
             <div class="cform-row">
               <div class="fld"><label for="cfName">Name</label><input id="cfName" name="name" type="text" autocomplete="name" placeholder="Your full name" required></div>
@@ -1234,7 +1234,6 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
             </fieldset>
             <div class="fld"><label for="cfMsg">Message</label><textarea id="cfMsg" name="message" placeholder="What would you like to talk about?" required></textarea></div>
             <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <input type="hidden" name="_subject" value="New enquiry — sohaila portfolio">
             <div class="cform-foot">
               <button type="submit" class="btn btn-primary" id="cfSubmit" data-magnetic>Book an assessment <span class="ico"><i class="fa-solid fa-arrow-right"></i></span></button>
               <span class="cform-status" id="cfStatus" role="status" aria-live="polite"></span>
@@ -1459,10 +1458,12 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
   const FEEDBACK = [
   ];
   const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const live = FEEDBACK.filter(f => f.quote && f.name && !/^\[/.test(f.quote.trim()));
   const fc = $('#fcats');
+  const renderFeedback = list => {
+  const live = list.filter(f => f.quote && f.name);
   if (fc && live.length) {
     fc.innerHTML = live.map((f, i) => `<figure class="fcard reveal" style="--d:${i * .08}s"><i class="fa-solid fa-quote-left" aria-hidden="true"></i><blockquote>${esc(f.quote)}</blockquote><figcaption><b>${esc(f.name)}</b>${f.role ? `<span>${esc(f.role)}</span>` : ''}${f.org ? `<span>${esc(f.org)}</span>` : ''}</figcaption></figure>`).join('');
+    observeReveals();
   }
   if (fc && !live.length) {
     $('#feedback').classList.add('is-empty');
@@ -1474,6 +1475,12 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
     b.innerHTML = 'Share feedback <span class="ico"><i class="fa-solid fa-arrow-right"></i></span>';
     $('#feedback .fnote p').remove();
   }
+  };
+  const API = $('#contactForm') ? $('#contactForm').action : '';
+  Promise.race([
+    fetch(API + '?action=feedback').then(r => r.json()).then(j => (j && j.items) || []),
+    new Promise(res => setTimeout(() => res([]), 4000))
+  ]).catch(() => []).then(items => renderFeedback([...FEEDBACK, ...items]));
   observeReveals();
 
   const copyBtn = $('#copyMail');
@@ -1489,7 +1496,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
 
   const cf = $('#contactForm');
   if (cf) {
-    const st = $('#cfStatus'), sb = $('#cfSubmit');
+    const st = $('#cfStatus'), sb = $('#cfSubmit'), cfOpened = Date.now();
     const setErr = (el, on) => el.closest('.fld').classList.toggle('err', on);
     $$('input[required],textarea[required]', cf).forEach(el => el.addEventListener('input', () => setErr(el, false)));
     cf.addEventListener('submit', async e => {
@@ -1500,15 +1507,13 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
       setErr(n, !okN); setErr(m, !okM); setErr(g, !okG);
       if (!(okN && okM && okG)) { st.classList.add('bad'); st.textContent = 'Please complete the highlighted fields.'; return; }
       sb.disabled = true; st.textContent = 'Sending…';
-      if (/YOUR_FORM_ID/.test(cf.action)) {
-        const fd = new FormData(cf);
-        const body = `${fd.get('message')}\n\n— ${fd.get('name')} (${fd.get('role')})\n${fd.get('email')}`;
-        location.href = `mailto:sohailaragab238@gmail.com?subject=${encodeURIComponent('New enquiry — portfolio')}&body=${encodeURIComponent(body)}`;
-        cf.classList.add('sent'); cf.reset(); sb.disabled = false; return;
-      }
       try {
-        const r = await fetch(cf.action, { method: 'POST', body: new FormData(cf), headers: { Accept: 'application/json' } });
-        if (!r.ok) throw 0;
+        const fd = new FormData(cf);
+        const d = {
+          type: 'contact', name: n.value.trim(), email: m.value.trim(), role: fd.get('role'),
+          message: g.value.trim(), website: fd.get('_gotcha') || '', t: Date.now() - cfOpened
+        };
+        await fetch(cf.action, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(d) });
         cf.classList.add('sent'); cf.reset();
       } catch {
         st.classList.add('bad'); st.textContent = 'Couldn’t send — please use WhatsApp or email instead.';
@@ -1648,7 +1653,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
     const body = $('#fbBody'), form = $('#fbForm'), status = $('#fbStatus'), submit = $('#fbSubmit');
     if (!overlay || !openBtn || !form) return;
 
-    const FB_ID = 'AKfycbwt_KSaGI25DQ4xkZ8pma6Xz-cwI1Lc3P0zvF_0qtWyYHj0a55D3yVC1NXbCw3GDw-7mg';
+    const FB_ID = 'AKfycbwhe62uXb370OxzUdaCjCMcXShyYIhVT-TieXQ3KzJ_LVHnj7CXsE7ffuC7KS8nWNYlHw';
     const endpoint = () => 'https://script.google.com/macros/s/' + FB_ID + '/exec';
 
     let lastFocus = null, openedAt = 0, rating = 0;
