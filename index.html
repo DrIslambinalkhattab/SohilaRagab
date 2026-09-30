@@ -216,7 +216,6 @@ h2 em{font-style:normal;font-weight:500;color:var(--accent)}
 
 .assess{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%)}
 
-
 .pills{display:flex;flex-wrap:wrap;gap:10px}
 .pill{display:inline-flex;align-items:center;padding:11px 18px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:14.5px;font-weight:500;color:var(--ink);box-shadow:var(--sh1);transition:transform .5s var(--ease),background .4s,color .4s,border-color .4s;cursor:default}
 .pill:hover{transform:translateY(-3px);background:var(--deep);color:#fff;border-color:var(--deep)}
@@ -408,7 +407,6 @@ footer.site .btn-round{width:46px;height:46px}
 
 .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,30px);opacity:0;pointer-events:none;z-index:120;display:flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;background:var(--deep);color:#fff;font-size:14.5px;font-weight:500;box-shadow:var(--sh2);transition:all .6s var(--ease)}
 
-
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
 .reveal{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
@@ -558,7 +556,6 @@ h2{letter-spacing:-.028em;line-height:1.06;text-wrap:balance}
 .xrow:hover .xarr{transform:rotate(90deg)}
 .xrow.open:hover .xarr{background:var(--deep);border-color:var(--deep);color:#fff}
 
-
 .pill{box-shadow:0 0 0 1px var(--hair) inset,0 1px 2px rgba(31,62,99,.03);border-color:transparent}
 
 .brow{transition:background .5s,padding .6s var(--ease-out);position:relative}
@@ -641,11 +638,9 @@ footer.site{border-top:1px solid var(--line);margin-top:34px}
 }
 @media (prefers-reduced-motion:reduce){.v-frame-line{animation:none}}
 
-/* ===== Hero refinements v2 ===== */
-/* 1) stats / rhythm — never clipped at the edge */
 .hero-grid>div:first-child{min-width:0}
 .hero h1{font-size:clamp(2.2rem,4vw,3.2rem);line-height:1.05}
-/* badge → headline: clear separation */
+
 .hero .pill-tag{display:inline-flex;margin-bottom:clamp(22px,2.6vw,32px)}
 .hero h1 .ln{padding-top:.06em}
 .hero-sub,.hero .lead{margin-block:20px}
@@ -655,25 +650,25 @@ footer.site{border-top:1px solid var(--line);margin-top:34px}
 .stats{gap:clamp(10px,1.6vw,28px);padding-right:2px}
 .stat b{font-size:clamp(26px,2.6vw,38px)}
 .stat span{overflow-wrap:anywhere}
-/* 4) CV = quiet text link */
+
 .cta-link{font-size:14px}
-/* 10 + 11) single frame, no dotted grid */
+
 .hero-grid::before{display:none}
 .v-fl1,.v-fl2{display:none}
-/* 5-8) new platform image: crop, tone, no watermarks */
+
 .visual{aspect-ratio:4/5;align-self:center;margin-block:0}
 .portrait{border-radius:200px 200px 28px 28px;background:#E9F0F7;box-shadow:0 0 0 1px var(--hair),0 2px 4px rgba(31,62,99,.05),0 28px 50px -18px rgba(31,62,99,.28),0 70px 110px -40px rgba(31,62,99,.30)}
 .portrait::before{background:linear-gradient(180deg,rgba(255,255,255,.10) 0%,transparent 22%,transparent 70%,rgba(22,44,72,.28) 100%)}
 .portrait img{filter:saturate(.75) brightness(1.08);object-fit:cover;object-position:50% 38%;transform:scale(1.22);transform-origin:50% 62%}
 .visual:hover .portrait img{transform:scale(1.27)}
-/* 9) context line under the image */
+
 .v-context{position:absolute;left:0;right:0;top:calc(100% + var(--cap-drop,44px) + 20px);text-align:center;font-size:13px;font-style:italic;font-weight:400;letter-spacing:.005em;line-height:1.5;color:var(--mute)}
 .v-context::before{content:"";display:block;width:28px;height:1px;margin:0 auto 12px;background:var(--powder2);opacity:.8}
-/* 12b) caption card: stable height so overhang math holds */
+
 .p-cap .voice{flex:0 0 auto}
 .p-cap .wave{width:clamp(64px,9vw,96px);overflow:hidden}
 .p-cap-l b{text-wrap:balance}
-/* 12) CURRENTLY card sits on the image edge, not over the face */
+
 .p-cap{left:50%;right:auto;bottom:0;width:calc(100% - 36px);max-width:none;transform:translate(-50%,50%);background:rgba(255,255,255,.95);box-shadow:0 0 0 1px var(--hair),0 22px 40px -18px rgba(22,44,72,.40)}
 .portrait{overflow:visible}
 .portrait .pimg{position:absolute;inset:0;border-radius:inherit;overflow:hidden;z-index:0}
@@ -686,7 +681,6 @@ footer.site{border-top:1px solid var(--line);margin-top:34px}
 @media(max-width:980px){.visual{margin-block:36px 128px}}
 @media(max-width:640px){.visual{margin-block:44px 132px;--cap-drop:58px}.p-cap{width:calc(100% - 24px)}.v-context{font-size:12.5px;padding-inline:8px}}
 
-/* ===== v3: spacing, status dot, real audio player ===== */
 .hero .svc-line{margin-bottom:28px}
 .stat b{font-weight:200;font-size:clamp(26px,2.6vw,38px)}
 .p-now::before{background:#5DB88C;box-shadow:0 0 0 0 rgba(93,184,140,.5);animation:pulseG 2.2s infinite}
@@ -708,37 +702,34 @@ footer.site{border-top:1px solid var(--line);margin-top:34px}
 @media(prefers-reduced-motion:reduce){.voice.playing .wave i.cur{animation:none}}
 @media(max-width:640px){.vp-btn{width:38px;height:38px}.p-cap .voice{gap:9px}.vp-time{display:none}.p-cap .wave i:nth-child(n+10){display:none}}
 
-/* ===== Review fixes ===== */
-/* 2 floating cursor ring removed; dot never blocks text */
 .cursor{display:none!important}
 .cursor-dot{z-index:0!important;pointer-events:none!important}
-/* 3 marquee behind nav */
+
 .nav{z-index:100}
 .marquee{z-index:1;margin-top:40px}
 .marquee-track span{font-size:17px}
-/* 5 line length */
+
 .about-copy .lead,.lead{max-width:62ch}
 .about-copy p{max-width:62ch}
-/* 9 columns align */
+
 .about-grid{align-items:start}
 .about-grid>div:first-child .eyebrow{margin-top:0}
-/* 10 unified labels */
+
 .lang-title{display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.2em;font-weight:500;color:var(--accent);margin-bottom:0;line-height:1.6}
 .lang-title::before{content:"";width:36px;height:1px;background:currentColor;opacity:.6}
 .langs{margin-top:28px}
-/* 6 German row highlighted */
+
 .lang.is-core{background:var(--soft);border-left:2px solid var(--accent);padding-inline:18px;border-radius:0 12px 12px 0}
 .lang.is-core:hover{padding-inline:18px}
 .lang.is-core b{font-weight:400;color:var(--deep)}
 .lang.is-core span{background:var(--surface);box-shadow:0 0 0 1px var(--hair) inset}
-/* 7 Arabic font */
+
 .lang b[lang="ar"]{font-family:'IBM Plex Sans Arabic','Tajawal',system-ui,sans-serif;font-weight:400;letter-spacing:0}
-/* 8 badges: not buttons */
+
 .pill,.skill-group .pill,.skill-group .pill.soft,.meta-pill,.lang span{background:transparent;border:1px solid var(--line);border-radius:6px;box-shadow:none}
 .lang.is-core span{background:var(--surface);border-color:rgba(79,134,184,.3)}
 .pill:hover{transform:none;background:transparent;color:var(--ink);border-color:var(--line)}
 
-/* ===== Assessment (v2) ===== */
 :root{--nav-h:96px}
 section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
 section[style*="scroll-margin-top"]{scroll-margin-top:calc(var(--nav-h) + 24px)!important}
@@ -772,7 +763,6 @@ section[style*="scroll-margin-top"]{scroll-margin-top:calc(var(--nav-h) + 24px)!
   .ac-get-list li:first-child{padding-top:0;border-top:0}
 }
 
-/* ===== Assessment polish: equal cards, higher contrast ===== */
 :root{--ink2:#3C4D61;--mute:#64768A;--text-secondary:#3C4D61}
 .ac-col{display:flex;flex-direction:column}
 .ac-col ul{flex:1;align-content:space-between}
@@ -783,7 +773,6 @@ section[style*="scroll-margin-top"]{scroll-margin-top:calc(var(--nav-h) + 24px)!
 .links a{color:var(--ink2)}
 .links a.active{color:var(--deep)}
 
-/* ===== Background (v2) ===== */
 #background::before,#background::after,#background *::before,#background *::after{pointer-events:none}
 .bg-grid{align-items:start;grid-template-columns:1.05fr .95fr}
 .bg-main .brow:first-of-type{border-top:1px solid var(--line)}
@@ -798,7 +787,6 @@ section[style*="scroll-margin-top"]{scroll-margin-top:calc(var(--nav-h) + 24px)!
 .bg-stage.nophoto .bg-stage-img{display:none}
 @media (max-width:1040px){.bg-grid{grid-template-columns:1fr}.bg-stage{aspect-ratio:4/3.4}}
 
-/* ===== Feedback (v3) ===== */
 :root{--nav-h:96px}
 section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
 #feedback{scroll-margin-top:calc(var(--nav-h) + 24px)!important}
@@ -819,7 +807,6 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
 .fb-link:hover{color:var(--deep);border-bottom-color:currentColor}
 .fb-link:hover i{transform:translateX(3px)}
 
-/* ===== Feedback form (native, posts to Apps Script) ===== */
 .fbf-body{overflow:auto;background:var(--surface);-webkit-overflow-scrolling:touch}
 .fbf{display:grid;gap:22px;padding:clamp(20px,3vw,32px)}
 .fbf-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
@@ -867,11 +854,10 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
 @keyframes fbpop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
 @media(max-width:640px){.fbf-row{grid-template-columns:1fr}.fbf-foot{flex-direction:column;align-items:stretch}.fbf-foot .btn{justify-content:space-between}}
 @media(prefers-reduced-motion:reduce){.fbf-done-ico{animation:none}}
-/* empty state: no published testimonials yet */
+
 #feedback.is-empty .fnote{margin-top:8px;display:flex;flex-direction:column;align-items:flex-start;gap:20px}
 #feedback.is-empty .fnote p{font-style:normal}
 
-/* ===== v4: Currently card (stacked), hero nav clearance ===== */
 .p-cap{flex-direction:column;align-items:stretch;justify-content:flex-start;gap:14px;padding:16px 18px 14px}
 .p-cap-l{flex:none;width:100%}
 .p-cap-l b{font-size:15px;text-wrap:pretty}
@@ -890,7 +876,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
 </style>
 <noscript><style>.cursor,.cursor-dot{display:none!important}.reveal,.fade-up{opacity:1!important;transform:none!important;filter:none!important}.split .w>i{transform:none!important}.hero h1 .ln>span{transform:none!important}</style></noscript>
 <style>
-/* ===== Journey review fixes ===== */
+
 .h2-sm{font-size:clamp(1.75rem,2.6vw,2.25rem);line-height:1.18;letter-spacing:-.015em}
 .journey::before{display:none}
 .jcontext{margin:0 0 34px;font-size:13px;color:var(--mute);letter-spacing:.01em;text-align:center}
@@ -917,7 +903,6 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
   .dot{width:56px;height:56px}.track-line{top:28px}
 }
 
-/* Expertise refinements */
 .xrow[data-x]:focus-visible{outline:none}
 .xrow[data-x]:focus-visible::before{opacity:1;transform:none;box-shadow:0 0 0 1px var(--accent),var(--sh1)}
 .xarr i{transition:transform .5s var(--ease)}
@@ -1145,7 +1130,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
   </div>
 </section>
 
-<section id="feedback" style="padding-top:clamp(24px,3vw,48px)"><!-- HIDDEN until real testimonials are supplied: remove the hidden attribute, the nav link is hidden too -->
+<section id="feedback" style="padding-top:clamp(24px,3vw,48px)">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow reveal">06 — Feedback</span>
@@ -1228,7 +1213,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
           </div>
           <div class="c-actions">
             <a class="c-wa" href="https://wa.me/201032624932" target="_blank" rel="noopener" data-magnetic><i class="fa-brands fa-whatsapp"></i>WhatsApp</a>
-            <a class="c-link" href="https://www.linkedin.com/in/sohaila-ragab-3592161b7ab" target="_blank" rel="noopener">LinkedIn <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:11px"></i></a>
+            <a class="c-link" href="https://www.linkedin.com/in/sohaila-ragab-3592161b7/" target="_blank" rel="noopener">LinkedIn <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:11px"></i></a>
             <button type="button" class="c-copy" id="copyMail"><i class="fa-regular fa-copy"></i><span>Copy email</span></button>
           </div>
         </div>
@@ -1335,7 +1320,6 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
   const heights = [26,42,60,38,72,50,86,64,96,70,88,56,74,44,62,34,24];
   wave.innerHTML = heights.map((h, i) => `<i style="--h:${h}px;--d:${(i * -0.18).toFixed(2)}s"></i>`).join('');
 
-  /* German intro player */
   (() => {
     const audio = $('#vpAudio'), btn = $('#vpBtn'), voice = $('#voice'), time = $('#vpTime'), bars = [...wave.children], icon = btn.firstElementChild, FALLBACK = 30;
     const dur = () => (isFinite(audio.duration) && audio.duration > 0) ? audio.duration : FALLBACK;
@@ -1472,9 +1456,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
     auto = setInterval(() => { if (userTouched || ++k > 2) { clearInterval(auto); return; } go(k); }, 2600);
   }, { threshold: .5 }).observe($('#journeyBox'));
 
-  /* Approved feedback — add only the entries you choose. Empty or placeholder entries keep the section hidden. */
   const FEEDBACK = [
-    // { quote: "Original text, verbatim", name: "First name + initial", role: "Training Manager", org: "Center name" },
   ];
   const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const live = FEEDBACK.filter(f => f.quote && f.name && !/^\[/.test(f.quote.trim()));
@@ -1653,7 +1635,6 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
         el.style.transform = '';
       });
     });
-    
     const cc = $('.contact-card');
     cc.addEventListener('pointermove', e => {
       const b = cc.getBoundingClientRect();
@@ -1667,8 +1648,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
     const body = $('#fbBody'), form = $('#fbForm'), status = $('#fbStatus'), submit = $('#fbSubmit');
     if (!overlay || !openBtn || !form) return;
 
-    /* Paste the Apps Script Web App deployment ID here (the part between /s/ and /exec). */
-    const FB_ID = 'PASTE_DEPLOYMENT_ID';
+    const FB_ID = 'AKfycbwt_KSaGI25DQ4xkZ8pma6Xz-cwI1Lc3P0zvF_0qtWyYHj0a55D3yVC1NXbCw3GDw-7mg';
     const endpoint = () => 'https://script.google.com/macros/s/' + FB_ID + '/exec';
 
     let lastFocus = null, openedAt = 0, rating = 0;
