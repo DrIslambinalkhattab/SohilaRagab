@@ -1137,13 +1137,26 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
       <h2 class="reveal split" style="--d:.08s">In their <em>own words.</em></h2>
       <p class="lead reveal" style="--d:.14s">What managers, trainers and learners say about the work.</p>
     </div>
-    <div class="feedback-grid" id="fcats"></div>
+    <div class="fcats" id="fcats"></div>
     <div class="fnote reveal">
       <p>Worked with me? I'd appreciate a few words.</p>
       <button type="button" class="fb-link" id="fbOpenBtn" aria-haspopup="dialog" aria-controls="fbOverlay">Share feedback <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
     </div>
   </div>
 </section>
+
+<div class="fq-overlay" id="fqOverlay" role="dialog" aria-modal="true" aria-labelledby="fqText">
+  <div class="fq-modal">
+    <button type="button" class="fq-close" id="fqCloseBtn" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    <span class="fq-mark"><i class="fa-solid fa-quote-left"></i></span>
+    <p class="fq-text" id="fqText"></p>
+    <div class="fq-foot">
+      <span class="fq-avatar" id="fqAvatar"></span>
+      <div><b id="fqName"></b><span id="fqRole"></span></div>
+      <span class="fq-cat" id="fqCat"><i class="fa-solid" id="fqCatIcon"></i><span id="fqCatLabel"></span></span>
+    </div>
+  </div>
+</div>
 
 <div class="fb-overlay" id="fbOverlay" role="dialog" aria-modal="true" aria-labelledby="fbTitle">
   <div class="fb-modal">
@@ -1462,7 +1475,46 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
   const renderFeedback = list => {
   const live = list.filter(f => f.quote && f.name);
   if (fc && live.length) {
-    fc.innerHTML = live.map((f, i) => `<figure class="fcard reveal" style="--d:${i * .08}s"><i class="fa-solid fa-quote-left" aria-hidden="true"></i><blockquote>${esc(f.quote)}</blockquote><figcaption><b>${esc(f.name)}</b>${f.role ? `<span>${esc(f.role)}</span>` : ''}${f.org ? `<span>${esc(f.org)}</span>` : ''}</figcaption></figure>`).join('');
+    const TRUNC_AT = 75;
+    const items = live.map(f => ({ quote: String(f.quote), name: String(f.name), role: [f.role, f.org].filter(Boolean).join(' · '), icon: f.icon || 'fa-quote-left', cat: f.cat || f.category || '' }));
+    const chip = (f, i, tab) => {
+      const q = f.quote, head = `<div class="fchip"><i class="fa-solid ${esc(f.icon)}" aria-hidden="true"></i>`, foot = `<footer><b>${esc(f.name)}</b>${f.role ? `<span>${esc(f.role)}</span>` : ''}</footer></div>`;
+      if (q.length <= TRUNC_AT) return `${head}<p>${esc(q)}</p>${foot}`;
+      let cut = q.lastIndexOf(' ', TRUNC_AT); if (cut < 0) cut = TRUNC_AT;
+      return `${head}<p>${esc(q.slice(0, cut))}&hellip; <button type="button" class="fq-more" data-fi="${i}"${tab ? ' tabindex="-1"' : ''} aria-haspopup="dialog" aria-controls="fqOverlay">Read full feedback</button></p>${foot}`;
+    };
+    const reps = Math.max(1, Math.ceil(8 / items.length));
+    const half = items.length * reps;
+    const setHtml = tab => Array.from({ length: half }, (_, k) => chip(items[k % items.length], k % items.length, tab)).join('');
+    fc.innerHTML = `<div class="fcat reveal"><div class="freel" style="--spd:${Math.max(40, half * 5)}s"><div class="freel-track">${setHtml(false)}<div style="display:contents" aria-hidden="true">${setHtml(true)}</div></div></div></div>`;
+
+    const fqOverlay = $('#fqOverlay'), fqCloseBtn = $('#fqCloseBtn');
+    let fqLastFocus = null;
+    const fqOpen = item => {
+      fqLastFocus = document.activeElement;
+      $('#fqText').textContent = item.quote;
+      $('#fqName').textContent = item.name;
+      $('#fqRole').textContent = item.role;
+      $('#fqAvatar').textContent = item.name.trim().charAt(0).toUpperCase();
+      $('#fqCatIcon').className = 'fa-solid ' + item.icon;
+      $('#fqCatLabel').textContent = item.cat;
+      $('#fqCat').style.display = item.cat ? '' : 'none';
+      fqOverlay.classList.add('open');
+      document.body.classList.add('fq-lock');
+      requestAnimationFrame(() => fqCloseBtn.focus());
+    };
+    const fqClose = () => {
+      fqOverlay.classList.remove('open');
+      document.body.classList.remove('fq-lock');
+      if (fqLastFocus && fqLastFocus.focus) fqLastFocus.focus();
+    };
+    fc.addEventListener('click', e => {
+      const btn = e.target.closest('.fq-more');
+      if (btn && items[+btn.dataset.fi]) fqOpen(items[+btn.dataset.fi]);
+    });
+    fqCloseBtn.addEventListener('click', fqClose);
+    fqOverlay.addEventListener('click', e => { if (e.target === fqOverlay) fqClose(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && fqOverlay.classList.contains('open')) fqClose(); });
     observeReveals();
   }
   if (fc && !live.length) {
