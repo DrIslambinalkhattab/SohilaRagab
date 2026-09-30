@@ -770,6 +770,17 @@ section[style*="scroll-margin-top"]{scroll-margin-top:calc(var(--nav-h) + 24px)!
   .ac-get-list li:first-child{padding-top:0;border-top:0}
 }
 
+/* ===== Assessment polish: equal cards, higher contrast ===== */
+:root{--ink2:#3C4D61;--mute:#64768A;--text-secondary:#3C4D61}
+.ac-col{display:flex;flex-direction:column}
+.ac-col ul{flex:1;align-content:space-between}
+.ac-item p{font-weight:400;color:var(--ink2)}
+.ac-item .ac-note{color:var(--ink2)}
+.ac-get-list span{color:var(--ink);font-weight:400}
+.lead{font-weight:400}
+.links a{color:var(--ink2)}
+.links a.active{color:var(--deep)}
+
 /* ===== Background (v2) ===== */
 #background::before,#background::after,#background *::before,#background *::after{pointer-events:none}
 .bg-grid{align-items:start;grid-template-columns:1.05fr .95fr}
@@ -805,8 +816,26 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
 .fb-link i{font-size:11px;transition:transform .4s var(--ease)}
 .fb-link:hover{color:var(--deep);border-bottom-color:currentColor}
 .fb-link:hover i{transform:translateX(3px)}
+
+/* ===== v4: Currently card (stacked), hero nav clearance ===== */
+.p-cap{flex-direction:column;align-items:stretch;justify-content:flex-start;gap:14px;padding:16px 18px 14px}
+.p-cap-l{flex:none;width:100%}
+.p-cap-l b{font-size:15px;text-wrap:pretty}
+.p-cap .voice{display:flex;align-items:center;gap:12px;width:100%;flex:none;padding-top:12px;border-top:1px solid var(--line)}
+.p-cap .wave{flex:1 1 auto;width:auto;min-width:0;justify-content:space-between;gap:0}
+.p-cap .vp-time{display:block;flex:none;min-width:34px;text-align:right}
+.visual{margin-bottom:158px;--cap-drop:84px}
+@media(max-width:980px){.visual{margin-block:36px 170px}}
+@media(max-width:640px){
+  .visual{margin-block:44px 176px;--cap-drop:84px}
+  .p-cap .vp-time{display:block}
+  .p-cap .wave i:nth-child(n+10){display:block}
+}
+.hero{padding-top:max(clamp(104px,14vh,124px),calc(var(--nav-h,96px) + 24px))}
+@media(max-width:980px){.hero{padding-top:max(132px,calc(var(--nav-h,96px) + 36px))}}
 </style>
-<noscript><style>.cursor,.cursor-dot{display:none!important}.reveal,.fade-up{opacity:1!important;transform:none!important;filter:none!important}.split .w>i{transform:none!important}.hero h1 .ln>span{transform:none!important}
+<noscript><style>.cursor,.cursor-dot{display:none!important}.reveal,.fade-up{opacity:1!important;transform:none!important;filter:none!important}.split .w>i{transform:none!important}.hero h1 .ln>span{transform:none!important}</style></noscript>
+<style>
 /* ===== Journey review fixes ===== */
 .h2-sm{font-size:clamp(1.75rem,2.6vw,2.25rem);line-height:1.18;letter-spacing:-.015em}
 .journey::before{display:none}
@@ -825,7 +854,6 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
 .jnum{font-size:64px;line-height:1;font-weight:200;letter-spacing:-.04em;padding:0;margin:0 0 4px}
 .jtitle{margin-top:8px}
 .jdesc{font-size:17px;color:var(--ink);font-weight:400}
-.jpoints i.jdot{width:4px;height:4px;margin-top:.85em;border-radius:50%;background:var(--accent)}
 .jpoints li{gap:16px}
 .meta-pill.live{border-color:rgba(47,122,85,.3)}
 @media(max-width:640px){
@@ -834,7 +862,18 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
   .node{padding:0 4px}.node-label{font-size:14px}.node-date{font-size:12px}
   .dot{width:56px;height:56px}.track-line{top:28px}
 }
-</style></noscript>
+
+/* Expertise refinements */
+.xrow[data-x]:focus-visible{outline:none}
+.xrow[data-x]:focus-visible::before{opacity:1;transform:none;box-shadow:0 0 0 1px var(--accent),var(--sh1)}
+.xarr i{transition:transform .5s var(--ease)}
+.xrow:hover .xarr,.xrow.open .xarr,.xrow.open:hover .xarr{transform:none}
+.xrow.open .xarr i{transform:rotate(180deg)}
+.xin .pills,.xin .disclaimer{margin-left:140px;max-width:820px;opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease) .32s,transform .6s var(--ease-out) .32s}
+.xin .pills{margin-top:22px}
+.xrow.open .xin .pills,.xrow.open .xin .disclaimer{opacity:1;transform:none}
+@media(max-width:900px){.xin .pills,.xin .disclaimer{margin-left:0}}
+</style>
 </head>
 
 <body>
@@ -860,7 +899,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
 <section class="hero" id="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="pill-tag fade-up" style="animation-delay:.1s"><i></i>German trainer · 8 years · Cairo</span>
+      <span class="pill-tag fade-up" style="animation-delay:.1s"><i></i>German trainer · 8 years · Egypt</span>
       <h1 aria-label="German that works in the room: training, assessment, and trainer development.">
         <span class="ln"><span>German that works in the room:</span></span>
         <span class="ln"><span>training, <em>assessment</em>, and trainer development.</span></span>
@@ -906,7 +945,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
       <span class="eyebrow reveal">01 — About</span>
       <p class="statement reveal" style="--d:.08s;margin-top:28px">Eight years with <em>German</em> — from academic study to assessing how others speak it.</p>
       <div class="about-copy">
-        <p class="lead reveal" style="--d:.14s">Four years of academic study — BA in European Languages &amp; Literature (German), Al-Azhar University — then five years training, assessing, and coaching instructors.</p>
+        <p class="lead reveal" style="--d:.14s">Four years of academic study — a BA in European Languages &amp; Literature (German), Al-Azhar University — and five years of training, assessing and coaching instructors, starting in my final year of study.</p>
         <p class="lead reveal" style="--d:.2s">I design and run speaking assessments and placement testing at Gib Gas Egypt, and coach instructors on assessment consistency.</p>
       </div>
     </div>
@@ -948,6 +987,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
         <li class="ac-item"><h3>Thinking in German, not translating</h3><p>Whether the sentence is built in German, or assembled in another language and carried across.</p></li>
         <li class="ac-item"><h3>Flow</h3><p>How far you can carry a thought before it breaks.</p></li>
         <li class="ac-item"><h3>Range of topics</h3><p>Which subjects you can hold a conversation in, not just answer questions about.</p></li>
+        <li class="ac-item"><h3>Recovering mid-sentence</h3><p>Whether you catch a slip and carry on, or stop and lose the thread.</p></li>
         </ul>
       </div>
 
@@ -958,6 +998,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
         <li class="ac-item"><h3>Understanding it</h3><p>Whether the question lands — without being misread, and without stalling on every single word.</p></li>
         <li class="ac-item"><h3>Answering it</h3><p>Whether the answer stays on the question, or drifts to something adjacent.</p></li>
         <li class="ac-item"><h3>Length</h3><p>Enough to show what you can do; not so much that it covers it up.</p></li>
+        <li class="ac-item"><h3>Asking back</h3><p>Whether you can ask for clarification instead of guessing.</p></li>
         </ul>
       </div>
     </div>
@@ -965,14 +1006,14 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
     <div class="ac-get reveal">
       <span class="ac-get-label">What you get</span>
       <ol class="ac-get-list">
-        <li><b>01</b><span>Spoken at the end of the call</span></li>
+        <li><b>01</b><span>Spoken feedback at the end of the call</span></li>
         <li><b>02</b><span>A written message: the errors, corrected</span></li>
         <li><b>03</b><span>Where to start, and what comes next</span></li>
       </ol>
     </div>
 
     <div class="ac-cta reveal">
-      <a href="#contact" class="btn btn-primary" data-magnetic>Book an assessment <span class="ico"><i class="fa-solid fa-arrow-right"></i></span></a>
+      <a href="https://wa.me/201032624932?text=Hello%20Sohaila%2C%20I%27d%20like%20to%20book%20a%20German%20speaking%20assessment." target="_blank" rel="noopener" class="btn btn-primary" data-magnetic>Book an assessment <span class="ico"><i class="fa-solid fa-arrow-right"></i></span></a>
     </div>
   </div>
 </section>
@@ -991,13 +1032,13 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
         <button class="btn btn-round jarrow" id="jPrev" aria-label="Previous role"><i class="fa-solid fa-arrow-left"></i></button>
         <div class="track" role="tablist" aria-label="Career progression">
           <div class="track-line"><i id="trackFill"></i></div>
-          <button class="node active" role="tab" aria-selected="true" data-step="0"><span class="dot">2021</span><span class="node-label">German Conversation Trainer</span><span class="node-date">Aug 2021 – Jul 2022</span></button>
+          <button class="node active" role="tab" aria-selected="true" data-step="0"><span class="dot">2021</span><span class="node-label">German Conversation Trainer</span><span class="node-date">Aug 2021 – present</span></button>
           <button class="node" role="tab" aria-selected="false" data-step="1"><span class="dot">2022</span><span class="node-label">Supervisor &amp; Coach</span><span class="node-date">Mar 2022 – Present</span></button>
           <button class="node" role="tab" aria-selected="false" data-step="2"><span class="node-now">Current</span><span class="dot">2023</span><span class="node-label">Assessment &amp; Placement</span><span class="node-date">Jan 2023 – Present</span></button>
         </div>
         <button class="btn btn-round jarrow" id="jNext" aria-label="Next role"><i class="fa-solid fa-arrow-right"></i></button>
       </div>
-      <p class="jparallel">Roles 02 and 03 run in parallel.</p>
+      <p class="jparallel">Roles overlapped as responsibilities grew.</p>
 
       <div class="jpanel" id="jpanel" aria-live="polite">
         <div>
@@ -1021,13 +1062,13 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
       <h2 class="reveal split" style="--d:.08s">Seven areas, <em>one focus:</em> clear, confident communication.</h2>
     </div>
     <div class="xlist">
-      <article class="xrow reveal open" data-x role="button" tabindex="0" aria-expanded="true" aria-controls="xd01"><span class="xnum">01</span><span class="xico"><i class="fa-regular fa-comments"></i></span><h3>German conversation &amp; fluency training</h3><p>Regular, structured practice that helps learners use everyday German effectively in real-life situations.</p><span class="xarr"><i class="fa-solid fa-arrow-right"></i></span><div class="xdetail" id="xd01" role="region"><div class="xin"><ul><li>Structured weekly speaking practice built around real-life scenarios</li><li>Live correction and feedback during conversation, not after it</li><li>Progressive difficulty matched to the learner’s CEFR level</li></ul></div></div></article>
-      <article class="xrow reveal open" data-x role="button" tabindex="0" aria-expanded="true" aria-controls="xd02"><span class="xnum">02</span><span class="xico"><i class="fa-solid fa-clipboard-check"></i></span><h3>Assessment &amp; placement testing</h3><p>Language interviews and level frameworks that place learners — and candidates for trainer roles — accurately.</p><span class="xarr"><i class="fa-solid fa-arrow-right"></i></span><div class="xdetail" id="xd02" role="region"><div class="xin"><ul><li>Structured language interviews mapped to CEFR level descriptors</li><li>Consistent scoring criteria applied across every candidate</li><li>Clear, actionable next step for each learner or trainer candidate</li></ul></div></div></article>
-      <article class="xrow reveal open" data-x role="button" tabindex="0" aria-expanded="true" aria-controls="xd03"><span class="xnum">03</span><span class="xico"><i class="fa-solid fa-microphone-lines"></i></span><h3>Speaking &amp; pronunciation coaching</h3><p>Correcting common speaking errors and refining pronunciation while steadily building learner confidence.</p><span class="xarr"><i class="fa-solid fa-arrow-right"></i></span><div class="xdetail" id="xd03" role="region"><div class="xin"><ul><li>Targeting the most frequent pronunciation and grammar errors</li><li>Focused drills for sounds, rhythm and intonation</li><li>Confidence-building techniques for hesitant speakers</li></ul></div></div></article>
-      <article class="xrow reveal open" data-x role="button" tabindex="0" aria-expanded="true" aria-controls="xd04"><span class="xnum">04</span><span class="xico"><i class="fa-solid fa-book-open"></i></span><h3>Curriculum &amp; conversation material development</h3><p>Designing conversation materials, curricula and level frameworks for multiple training systems.</p><span class="xarr"><i class="fa-solid fa-arrow-right"></i></span><div class="xdetail" id="xd04" role="region"><div class="xin"><ul><li>Conversation materials aligned to each level and training goal</li><li>Curricula and level frameworks adaptable across training systems</li><li>Materials refined continuously from real learner feedback</li></ul><div class="pills"><span class="pill">Goethe exam preparation</span><span class="pill">telc exam preparation</span><span class="pill">Speaking-focused preparation</span></div><div class="disclaimer"><i class="fa-solid fa-circle-info"></i><span>Exam-preparation experience only. No official affiliation with Goethe-Institut or telc, and no examiner status.</span></div></div></div></article>
-      <article class="xrow reveal open" data-x role="button" tabindex="0" aria-expanded="true" aria-controls="xd05"><span class="xnum">05</span><span class="xico"><i class="fa-solid fa-people-group"></i></span><h3>Supervisor responsibilities</h3><p>Leading and supervising German conversation programs, driving measurable improvements in learner fluency.</p><span class="xarr"><i class="fa-solid fa-arrow-right"></i></span><div class="xdetail" id="xd05" role="region"><div class="xin"><ul><li>Supervising German conversation programs and their trainers</li><li>Monitoring quality and tracking measurable fluency progress</li><li>Standardising methods so results stay consistent across groups</li></ul></div></div></article>
-      <article class="xrow reveal open" data-x role="button" tabindex="0" aria-expanded="true" aria-controls="xd06"><span class="xnum">06</span><span class="xico"><i class="fa-solid fa-chalkboard-user"></i></span><h3>Trainer coaching / Trainer of Trainers</h3><p>Designing and delivering coaching sessions that strengthen teaching effectiveness and methodology.</p><span class="xarr"><i class="fa-solid fa-arrow-right"></i></span><div class="xdetail" id="xd06" role="region"><div class="xin"><ul><li>Coaching sessions that strengthen teaching effectiveness</li><li>Observation, feedback and methodology development for trainers</li><li>Building trainers who can train others — a multiplier effect</li></ul></div></div></article>
-      <article class="xrow reveal open" data-x role="button" tabindex="0" aria-expanded="true" aria-controls="xd07"><span class="xnum">07</span><span class="xico"><i class="fa-solid fa-language"></i></span><h3>German–Arabic translation</h3><p>Precise, natural-sounding translation between German and Arabic, shaped by a degree in translation-focused language studies.</p><span class="xarr"><i class="fa-solid fa-arrow-right"></i></span><div class="xdetail" id="xd07" role="region"><div class="xin"><ul><li>German ⇄ Arabic translation with attention to register and tone</li><li>Terminology kept consistent across documents and training material</li><li>Meaning-first approach — natural in the target language, faithful to the source</li></ul></div></div></article>
+      <article class="xrow reveal open" data-x role="button" tabindex="0" aria-expanded="true" aria-controls="xd01"><span class="xnum">01</span><span class="xico"><i class="fa-regular fa-comments"></i></span><h3>German conversation &amp; fluency training</h3><p>Regular, structured practice that helps learners use everyday German effectively in real-life situations.</p><span class="xarr"><i class="fa-solid fa-chevron-down"></i></span><div class="xdetail" id="xd01" role="region"><div class="xin"><ul><li>Structured weekly speaking practice built around real-life scenarios</li><li>Live correction and feedback during conversation, not after it</li><li>Progressive difficulty matched to the learner’s CEFR level</li></ul><div class="pills"><span class="pill">Goethe exam preparation</span><span class="pill">telc exam preparation</span><span class="pill">Speaking-focused preparation</span></div><div class="disclaimer"><i class="fa-solid fa-circle-info"></i><span>Exam-preparation experience only. No official affiliation with Goethe-Institut or telc, and no examiner status.</span></div></div></div></article>
+      <article class="xrow reveal" data-x role="button" tabindex="0" aria-expanded="false" aria-controls="xd02"><span class="xnum">02</span><span class="xico"><i class="fa-solid fa-clipboard-check"></i></span><h3>Assessment &amp; placement testing</h3><p>Language interviews and level frameworks that place learners — and candidates for trainer roles — accurately.</p><span class="xarr"><i class="fa-solid fa-chevron-down"></i></span><div class="xdetail" id="xd02" role="region"><div class="xin"><ul><li>Structured language interviews mapped to CEFR level descriptors</li><li>Consistent scoring criteria applied across every candidate</li><li>Clear, actionable next step for each learner or trainer candidate</li></ul></div></div></article>
+      <article class="xrow reveal" data-x role="button" tabindex="0" aria-expanded="false" aria-controls="xd03"><span class="xnum">03</span><span class="xico"><i class="fa-solid fa-microphone-lines"></i></span><h3>Speaking &amp; pronunciation coaching</h3><p>Correcting common speaking errors and refining pronunciation while steadily building learner confidence.</p><span class="xarr"><i class="fa-solid fa-chevron-down"></i></span><div class="xdetail" id="xd03" role="region"><div class="xin"><ul><li>Targeting the most frequent pronunciation and grammar errors</li><li>Focused drills for sounds, rhythm and intonation</li><li>Confidence-building techniques for hesitant speakers</li></ul></div></div></article>
+      <article class="xrow reveal" data-x role="button" tabindex="0" aria-expanded="false" aria-controls="xd04"><span class="xnum">04</span><span class="xico"><i class="fa-solid fa-book-open"></i></span><h3>Curriculum &amp; conversation material development</h3><p>Designing conversation materials, curricula and level frameworks for multiple training systems.</p><span class="xarr"><i class="fa-solid fa-chevron-down"></i></span><div class="xdetail" id="xd04" role="region"><div class="xin"><ul><li>Conversation materials aligned to each level and training goal</li><li>Curricula and level frameworks adaptable across training systems</li><li>Materials refined continuously from real learner feedback</li></ul></div></div></article>
+      <article class="xrow reveal" data-x role="button" tabindex="0" aria-expanded="false" aria-controls="xd05"><span class="xnum">05</span><span class="xico"><i class="fa-solid fa-people-group"></i></span><h3>Supervisor responsibilities</h3><p>Leading and supervising German conversation programs, driving steady improvements in learner fluency.</p><span class="xarr"><i class="fa-solid fa-chevron-down"></i></span><div class="xdetail" id="xd05" role="region"><div class="xin"><ul><li>Guiding a team of conversation trainers across multiple programs</li><li>Monitoring quality and tracking fluency progress</li><li>Standardising methods so results stay consistent across groups</li></ul></div></div></article>
+      <article class="xrow reveal" data-x role="button" tabindex="0" aria-expanded="false" aria-controls="xd06"><span class="xnum">06</span><span class="xico"><i class="fa-solid fa-chalkboard-user"></i></span><h3>Trainer coaching / Trainer of Trainers</h3><p>Designing and delivering coaching sessions that strengthen teaching effectiveness and methodology.</p><span class="xarr"><i class="fa-solid fa-chevron-down"></i></span><div class="xdetail" id="xd06" role="region"><div class="xin"><ul><li>Coaching trainers one-to-one and in groups across the programs</li><li>Observation, feedback and methodology development for trainers</li><li>Building trainers who can train others — a multiplier effect</li></ul></div></div></article>
+      <article class="xrow reveal" data-x role="button" tabindex="0" aria-expanded="false" aria-controls="xd07"><span class="xnum">07</span><span class="xico"><i class="fa-solid fa-language"></i></span><h3>German–Arabic translation</h3><p>Precise, natural-sounding translation between German and Arabic, shaped by academic study of German language and literature.</p><span class="xarr"><i class="fa-solid fa-chevron-down"></i></span><div class="xdetail" id="xd07" role="region"><div class="xin"><ul><li>German ⇄ Arabic translation with attention to register and tone</li><li>Terminology kept consistent across documents and training material</li><li>Meaning-first approach — natural in the target language, faithful to the source</li></ul></div></div></article>
     </div>
   </div>
 </section>
@@ -1039,8 +1080,8 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
         <span class="eyebrow reveal">05 — Background</span>
         <h2 class="reveal split" style="--d:.08s;font-size:clamp(30px,3.6vw,48px)">Education &amp; <em>background</em></h2>
       </div>
-      <div class="brow reveal"><i class="fa-solid fa-graduation-cap"></i><div><h3>Bachelor’s Degree in European Languages &amp; Literature (German)</h3><p>Al-Azhar University · Faculty of Languages &amp; Translation</p><small>2018 – 2022</small></div></div>
-      <div class="brow reveal"><i class="fa-solid fa-users"></i><div><h3>Ich spiele Deutsch</h3><p>Community teaching — team teaching German to beginner-level learners</p><small>2023</small></div></div>
+      <div class="brow reveal"><i class="fa-solid fa-graduation-cap"></i><div><h3>Bachelor’s Degree in European Languages &amp; Literature (German)</h3><p>Al-Azhar University · Faculty of Humanities · German Department</p><small>2018 – 2022</small></div></div>
+      <div class="brow reveal"><i class="fa-solid fa-users"></i><div><h3>Ich spiele Deutsch</h3><p>Volunteer community teaching — team teaching German to beginner-level learners</p><small>2023</small></div></div>
     </div>
 
     <figure class="bg-stage reveal" style="--d:.12s">
@@ -1098,7 +1139,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
           <h2>Book a speaking assessment, or talk about <em>training for your team.</em></h2>
           <p class="lead">Tell me who you are and what you need — I’ll reply personally, usually within one working day.</p>
           <div class="c-meta">
-            <span><i class="fa-solid fa-location-dot"></i>Based in Egypt · Online worldwide · On-site in Cairo &amp; Alexandria</span>
+            <span><i class="fa-solid fa-location-dot"></i>Based in Beheira, Egypt · Online worldwide · On-site across Beheira</span>
             <a href="mailto:sohailaragab238@gmail.com" class="c-link" style="padding:0"><i class="fa-regular fa-envelope"></i>sohailaragab238@gmail.com</a>
           </div>
           <div class="c-actions">
@@ -1178,13 +1219,27 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
   addEventListener('resize', () => { if (innerWidth > 900) setMenu(false); });
   $$('#links a, .nav .btn').forEach(a => a.addEventListener('click', () => setMenu(false)));
 
+  const spyIds = ['about','assessment','journey','expertise','feedback','background'];
   const linkMap = new Map($$('#links a').map(a => [a.getAttribute('href').slice(1), a]));
-  const spy = new IntersectionObserver(es => es.forEach(e => {
-    if (!e.isIntersecting) return;
-    linkMap.forEach(a => a.classList.remove('active'));
-    const a = linkMap.get(e.target.id); if (a) a.classList.add('active');
-  }), { rootMargin: '-45% 0px -50% 0px' });
-  ['about','assessment','journey','expertise','background','feedback'].forEach(id => spy.observe($('#' + id)));
+  let spyRaf = 0, spyCur = null;
+  const runSpy = () => {
+    spyRaf = 0;
+    const line = innerHeight * 0.35;
+    let cur = null;
+    spyIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el || !el.offsetParent) return;
+      const r = el.getBoundingClientRect();
+      if (r.top <= line && r.bottom > line) cur = id;
+    });
+    if (cur === spyCur) return;
+    spyCur = cur;
+    linkMap.forEach((a, id) => { const on = id === cur; a.classList.toggle('active', on); on ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current'); });
+  };
+  const queueSpy = () => { if (!spyRaf) spyRaf = requestAnimationFrame(runSpy); };
+  addEventListener('scroll', queueSpy, { passive: true });
+  addEventListener('resize', queueSpy);
+  runSpy();
 
   const rev = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('in'); rev.unobserve(e.target); }
@@ -1276,21 +1331,21 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
   }
 
   const steps = [
-    { no:'01', title:'German Conversation Trainer', period:'Aug 2021 – Jul 2022', tag:'Foundation',
+    { no:'01', title:'German Conversation Trainer', period:'Aug 2021 – present', tag:'Foundation',
       desc:'Where it began — helping learners speak German with confidence through regular, real conversation.',
       pts:['Led weekly conversation practice that built learners’ confidence with everyday, real-life German.',
            'Corrected common speaking errors and steadily improved pronunciation across groups.',
            'Encouraged active participation so quieter learners spoke up in group discussions.'] },
     { no:'02', title:'Supervisor & Conversation Trainers Coach', period:'Mar 2022 – Present', tag:'Leadership',
       desc:'Widening the scope — from guiding learners to leading programs and coaching the trainers behind them.',
-      pts:['Lead and supervise German conversation programs, driving measurable improvements in learner fluency.',
+      pts:['Lead and supervise German conversation programs, driving steady improvements in learner fluency.',
            'Design and deliver trainer coaching sessions that raise teaching effectiveness and methodology.',
            'Evaluate learners’ speaking skills, improving pronunciation and confidence in a supportive environment.'] },
     { no:'03', title:'Assessment & Placement Trainer', period:'Jan 2023 – Present', tag:'Standards',
       desc:'Shaping the standard — designing frameworks and assessing speaking ability and trainer candidates.',
       pts:['Designed the level framework used to place all new learners across 3 programs.',
            'Interviewed and assessed 40+ candidates for conversation trainer positions.',
-           'Work with trainers and supervisors to keep standards consistent and track learner progress.'] }
+           'Worked with trainers and supervisors to keep standards consistent and track learner progress.'] }
   ];
   const nodes = $$('.node'), panel = $('#jpanel'), fill = $('#trackFill');
   let cur = 0, auto = null, userTouched = false;
@@ -1305,7 +1360,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
       `<span class="meta-pill"><i class="fa-regular fa-building"></i>Gib Gas · Egypt</span>` +
       `<span class="meta-pill ${live ? 'live' : ''}"><i class="fa-solid fa-circle" style="font-size:6px"></i>${live ? 'Current role' : s.tag}</span>`;
     $('#jDesc').textContent = s.desc;
-    $('#jPoints').innerHTML = s.pts.map(p => `<li><i class="jdot"></i><span>${p}</span></li>`).join('');
+    $('#jPoints').innerHTML = s.pts.map(p => `<li><i class="fa-solid fa-check jdot" aria-hidden="true"></i><span>${p}</span></li>`).join('');
   };
   const go = (i, instant) => {
     i = (i + steps.length) % steps.length;
@@ -1473,6 +1528,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
     const rows = $$('.xrow[data-x]');
     const toggle = r => {
       const open = !r.classList.contains('open');
+      rows.forEach(o => { o.classList.remove('open'); o.setAttribute('aria-expanded', 'false'); });
       r.classList.toggle('open', open);
       r.setAttribute('aria-expanded', open ? 'true' : 'false');
     };
