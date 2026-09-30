@@ -244,8 +244,10 @@ h2 em{font-style:normal;font-weight:500;color:var(--accent)}
 .fcard:hover{transform:translateY(-6px);box-shadow:var(--sh2)}
 .fcard>i{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--warm-soft);color:var(--warm);font-size:16px}
 .fcard blockquote{font-size:19px;font-weight:300;line-height:1.6;color:var(--ink)}
-.fcard footer b{display:block;font-weight:500;font-size:15px}
-.fcard footer span{font-size:13.5px;color:var(--mute)}
+.fcard figcaption{display:flex;flex-direction:column;gap:2px;padding-top:20px;border-top:1px solid var(--line)}
+.fcard figcaption b{font-weight:500;font-size:15px;color:var(--ink)}
+.fcard figcaption span{font-size:13.5px;color:var(--mute)}
+.fcard figcaption span+span{color:var(--accent);font-weight:500}
 .fcard.empty{background:transparent;border:1.5px dashed var(--powder2);box-shadow:none}
 .fcard.empty:hover{transform:none;box-shadow:none;background:rgba(255,255,255,.5)}
 .fcard.empty h3{font-size:20px;font-weight:500}
@@ -639,8 +641,11 @@ footer.site{border-top:1px solid var(--line);margin-top:34px}
 }
 @media (prefers-reduced-motion:reduce){.v-frame-line{animation:none}}
 
+/* ===== Hero refinements v2 ===== */
+/* 1) stats / rhythm — never clipped at the edge */
 .hero-grid>div:first-child{min-width:0}
 .hero h1{font-size:clamp(2.2rem,4vw,3.2rem);line-height:1.05}
+/* badge → headline: clear separation */
 .hero .pill-tag{display:inline-flex;margin-bottom:clamp(22px,2.6vw,32px)}
 .hero h1 .ln{padding-top:.06em}
 .hero-sub,.hero .lead{margin-block:20px}
@@ -650,19 +655,25 @@ footer.site{border-top:1px solid var(--line);margin-top:34px}
 .stats{gap:clamp(10px,1.6vw,28px);padding-right:2px}
 .stat b{font-size:clamp(26px,2.6vw,38px)}
 .stat span{overflow-wrap:anywhere}
+/* 4) CV = quiet text link */
 .cta-link{font-size:14px}
+/* 10 + 11) single frame, no dotted grid */
 .hero-grid::before{display:none}
 .v-fl1,.v-fl2{display:none}
+/* 5-8) new platform image: crop, tone, no watermarks */
 .visual{aspect-ratio:4/5;align-self:center;margin-block:0}
 .portrait{border-radius:200px 200px 28px 28px;background:#E9F0F7;box-shadow:0 0 0 1px var(--hair),0 2px 4px rgba(31,62,99,.05),0 28px 50px -18px rgba(31,62,99,.28),0 70px 110px -40px rgba(31,62,99,.30)}
 .portrait::before{background:linear-gradient(180deg,rgba(255,255,255,.10) 0%,transparent 22%,transparent 70%,rgba(22,44,72,.28) 100%)}
 .portrait img{filter:saturate(.75) brightness(1.08);object-fit:cover;object-position:50% 38%;transform:scale(1.22);transform-origin:50% 62%}
 .visual:hover .portrait img{transform:scale(1.27)}
+/* 9) context line under the image */
 .v-context{position:absolute;left:0;right:0;top:calc(100% + var(--cap-drop,44px) + 20px);text-align:center;font-size:13px;font-style:italic;font-weight:400;letter-spacing:.005em;line-height:1.5;color:var(--mute)}
 .v-context::before{content:"";display:block;width:28px;height:1px;margin:0 auto 12px;background:var(--powder2);opacity:.8}
+/* 12b) caption card: stable height so overhang math holds */
 .p-cap .voice{flex:0 0 auto}
 .p-cap .wave{width:clamp(64px,9vw,96px);overflow:hidden}
 .p-cap-l b{text-wrap:balance}
+/* 12) CURRENTLY card sits on the image edge, not over the face */
 .p-cap{left:50%;right:auto;bottom:0;width:calc(100% - 36px);max-width:none;transform:translate(-50%,50%);background:rgba(255,255,255,.95);box-shadow:0 0 0 1px var(--hair),0 22px 40px -18px rgba(22,44,72,.40)}
 .portrait{overflow:visible}
 .portrait .pimg{position:absolute;inset:0;border-radius:inherit;overflow:hidden;z-index:0}
@@ -675,6 +686,7 @@ footer.site{border-top:1px solid var(--line);margin-top:34px}
 @media(max-width:980px){.visual{margin-block:36px 128px}}
 @media(max-width:640px){.visual{margin-block:44px 132px;--cap-drop:58px}.p-cap{width:calc(100% - 24px)}.v-context{font-size:12.5px;padding-inline:8px}}
 
+/* ===== v3: spacing, status dot, real audio player ===== */
 .hero .svc-line{margin-bottom:28px}
 .stat b{font-weight:200;font-size:clamp(26px,2.6vw,38px)}
 .p-now::before{background:#5DB88C;box-shadow:0 0 0 0 rgba(93,184,140,.5);animation:pulseG 2.2s infinite}
@@ -696,27 +708,37 @@ footer.site{border-top:1px solid var(--line);margin-top:34px}
 @media(prefers-reduced-motion:reduce){.voice.playing .wave i.cur{animation:none}}
 @media(max-width:640px){.vp-btn{width:38px;height:38px}.p-cap .voice{gap:9px}.vp-time{display:none}.p-cap .wave i:nth-child(n+10){display:none}}
 
+/* ===== Review fixes ===== */
+/* 2 floating cursor ring removed; dot never blocks text */
 .cursor{display:none!important}
 .cursor-dot{z-index:0!important;pointer-events:none!important}
+/* 3 marquee behind nav */
 .nav{z-index:100}
 .marquee{z-index:1;margin-top:40px}
 .marquee-track span{font-size:17px}
+/* 5 line length */
 .about-copy .lead,.lead{max-width:62ch}
 .about-copy p{max-width:62ch}
+/* 9 columns align */
 .about-grid{align-items:start}
 .about-grid>div:first-child .eyebrow{margin-top:0}
+/* 10 unified labels */
 .lang-title{display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.2em;font-weight:500;color:var(--accent);margin-bottom:0;line-height:1.6}
 .lang-title::before{content:"";width:36px;height:1px;background:currentColor;opacity:.6}
 .langs{margin-top:28px}
+/* 6 German row highlighted */
 .lang.is-core{background:var(--soft);border-left:2px solid var(--accent);padding-inline:18px;border-radius:0 12px 12px 0}
 .lang.is-core:hover{padding-inline:18px}
 .lang.is-core b{font-weight:400;color:var(--deep)}
 .lang.is-core span{background:var(--surface);box-shadow:0 0 0 1px var(--hair) inset}
+/* 7 Arabic font */
 .lang b[lang="ar"]{font-family:'IBM Plex Sans Arabic','Tajawal',system-ui,sans-serif;font-weight:400;letter-spacing:0}
+/* 8 badges: not buttons */
 .pill,.skill-group .pill,.skill-group .pill.soft,.meta-pill,.lang span{background:transparent;border:1px solid var(--line);border-radius:6px;box-shadow:none}
 .lang.is-core span{background:var(--surface);border-color:rgba(79,134,184,.3)}
 .pill:hover{transform:none;background:transparent;color:var(--ink);border-color:var(--line)}
 
+/* ===== Assessment (v2) ===== */
 :root{--nav-h:96px}
 section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
 section[style*="scroll-margin-top"]{scroll-margin-top:calc(var(--nav-h) + 24px)!important}
@@ -750,6 +772,7 @@ section[style*="scroll-margin-top"]{scroll-margin-top:calc(var(--nav-h) + 24px)!
   .ac-get-list li:first-child{padding-top:0;border-top:0}
 }
 
+/* ===== Assessment polish: equal cards, higher contrast ===== */
 :root{--ink2:#3C4D61;--mute:#64768A;--text-secondary:#3C4D61}
 .ac-col{display:flex;flex-direction:column}
 .ac-col ul{flex:1;align-content:space-between}
@@ -760,6 +783,7 @@ section[style*="scroll-margin-top"]{scroll-margin-top:calc(var(--nav-h) + 24px)!
 .links a{color:var(--ink2)}
 .links a.active{color:var(--deep)}
 
+/* ===== Background (v2) ===== */
 #background::before,#background::after,#background *::before,#background *::after{pointer-events:none}
 .bg-grid{align-items:start;grid-template-columns:1.05fr .95fr}
 .bg-main .brow:first-of-type{border-top:1px solid var(--line)}
@@ -774,6 +798,7 @@ section[style*="scroll-margin-top"]{scroll-margin-top:calc(var(--nav-h) + 24px)!
 .bg-stage.nophoto .bg-stage-img{display:none}
 @media (max-width:1040px){.bg-grid{grid-template-columns:1fr}.bg-stage{aspect-ratio:4/3.4}}
 
+/* ===== Feedback (v3) ===== */
 :root{--nav-h:96px}
 section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
 #feedback{scroll-margin-top:calc(var(--nav-h) + 24px)!important}
@@ -794,6 +819,59 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
 .fb-link:hover{color:var(--deep);border-bottom-color:currentColor}
 .fb-link:hover i{transform:translateX(3px)}
 
+/* ===== Feedback form (native, posts to Apps Script) ===== */
+.fbf-body{overflow:auto;background:var(--surface);-webkit-overflow-scrolling:touch}
+.fbf{display:grid;gap:22px;padding:clamp(20px,3vw,32px)}
+.fbf-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.fbf-f{display:grid;gap:9px;align-content:start}
+.fbf-l{display:flex;align-items:baseline;justify-content:space-between;gap:12px;font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.fbf-l small{font-size:12.5px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--mute);font-variant-numeric:tabular-nums}
+.fbf input[type=text],.fbf input[type=email],.fbf select,.fbf textarea{width:100%;font:inherit;font-size:15.5px;line-height:1.5;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px 16px;outline:0;-webkit-appearance:none;appearance:none;transition:border-color .3s,box-shadow .3s,background .3s}
+.fbf textarea{min-height:148px;resize:vertical;line-height:1.65}
+.fbf select{padding-right:44px;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%238595A8' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 18px center}
+.fbf ::placeholder{color:var(--mute);opacity:1}
+.fbf input:hover,.fbf select:hover,.fbf textarea:hover{border-color:var(--powder2)}
+.fbf input:focus,.fbf select:focus,.fbf textarea:focus{border-color:var(--accent);background:#fff;box-shadow:0 0 0 4px rgba(79,134,184,.14)}
+.fbf-msg{display:none;font-size:12.5px;color:#B24A3F}
+.fbf-f.err .fbf-msg{display:block}
+.fbf-f.err input,.fbf-f.err select,.fbf-f.err textarea{border-color:#C9665B;box-shadow:0 0 0 4px rgba(201,102,91,.10)}
+.fbf-stars{display:flex;align-items:center;gap:6px}
+.fbf-star{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--bg);border:1px solid var(--line);color:#B4C2D1;font-size:16px;cursor:pointer;transition:transform .4s var(--ease),background .3s,color .3s,border-color .3s,box-shadow .3s}
+.fbf-star:hover{transform:translateY(-2px);border-color:var(--powder2)}
+.fbf-star.on{background:var(--soft);border-color:var(--powder2);color:var(--accent);box-shadow:var(--sh1)}
+.fbf-star:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.fbf-rtxt{margin-left:10px;font-size:13.5px;font-weight:500;color:var(--deep);min-height:1.2em;transition:opacity .3s}
+.fbf-consent{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border-radius:16px;background:var(--bg);border:1px solid var(--line);cursor:pointer;transition:border-color .3s,background .3s}
+.fbf-consent:hover{border-color:var(--powder2)}
+.fbf-consent input{position:absolute;opacity:0;pointer-events:none}
+.fbf-box{flex:none;display:grid;place-items:center;width:22px;height:22px;margin-top:1px;border-radius:7px;background:#fff;border:1.5px solid var(--powder2);color:#fff;font-size:11px;transition:background .3s,border-color .3s}
+.fbf-box i{transform:scale(0);transition:transform .35s var(--ease-out)}
+.fbf-consent input:checked+.fbf-box{background:var(--deep);border-color:var(--deep)}
+.fbf-consent input:checked+.fbf-box i{transform:scale(1)}
+.fbf-consent input:focus-visible+.fbf-box{box-shadow:0 0 0 4px rgba(79,134,184,.22)}
+.fbf-consent span:last-child{font-size:14px;line-height:1.55;color:var(--ink2)}
+.fbf-consent b{color:var(--ink);font-weight:500}
+.fbf-hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+.fbf-foot{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding-top:4px}
+.fbf-note{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--mute)}
+.fbf-note i{color:var(--accent);font-size:12px}
+.fbf-status{min-height:1.3em;font-size:13.5px;color:var(--ink2)}
+.fbf-status.bad{color:#B24A3F}
+.fbf .btn[disabled]{opacity:.6;pointer-events:none}
+.fbf-done{display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;min-height:440px;padding:clamp(28px,5vw,56px)}
+.fbf-body.sent .fbf{display:none}
+.fbf-body.sent .fbf-done{display:flex}
+.fbf-done-ico{display:grid;place-items:center;width:72px;height:72px;border-radius:50%;background:#E6F4EC;color:#2F7A55;font-size:26px;box-shadow:0 14px 30px -12px rgba(47,122,85,.45);animation:fbpop .7s var(--ease-out) both}
+.fbf-done h4{margin:8px 0 0;font-size:clamp(22px,2.4vw,28px);font-weight:400;letter-spacing:-.015em;color:var(--ink)}
+.fbf-done p{max-width:38ch;margin:0 0 10px;font-size:15px;line-height:1.65;color:var(--ink2)}
+@keyframes fbpop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+@media(max-width:640px){.fbf-row{grid-template-columns:1fr}.fbf-foot{flex-direction:column;align-items:stretch}.fbf-foot .btn{justify-content:space-between}}
+@media(prefers-reduced-motion:reduce){.fbf-done-ico{animation:none}}
+/* empty state: no published testimonials yet */
+#feedback.is-empty .fnote{margin-top:8px;display:flex;flex-direction:column;align-items:flex-start;gap:20px}
+#feedback.is-empty .fnote p{font-style:normal}
+
+/* ===== v4: Currently card (stacked), hero nav clearance ===== */
 .p-cap{flex-direction:column;align-items:stretch;justify-content:flex-start;gap:14px;padding:16px 18px 14px}
 .p-cap-l{flex:none;width:100%}
 .p-cap-l b{font-size:15px;text-wrap:pretty}
@@ -812,6 +890,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
 </style>
 <noscript><style>.cursor,.cursor-dot{display:none!important}.reveal,.fade-up{opacity:1!important;transform:none!important;filter:none!important}.split .w>i{transform:none!important}.hero h1 .ln>span{transform:none!important}</style></noscript>
 <style>
+/* ===== Journey review fixes ===== */
 .h2-sm{font-size:clamp(1.75rem,2.6vw,2.25rem);line-height:1.18;letter-spacing:-.015em}
 .journey::before{display:none}
 .jcontext{margin:0 0 34px;font-size:13px;color:var(--mute);letter-spacing:.01em;text-align:center}
@@ -862,7 +941,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
     <a href="#assessment">Assessment</a>
     <a href="#journey">Journey</a>
     <a href="#expertise">Expertise</a>
-    <a href="#feedback" hidden>Feedback</a>
+    <a href="#feedback">Feedback</a>
     <a href="#background">Background</a>
   </nav>
   <a href="#contact" class="btn btn-primary btn-sm" data-magnetic>Get in Touch</a>
@@ -1066,7 +1145,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
   </div>
 </section>
 
-<section id="feedback" hidden style="padding-top:clamp(24px,3vw,48px)"><!-- HIDDEN until real testimonials are supplied: remove the hidden attribute, the nav link is hidden too -->
+<section id="feedback" style="padding-top:clamp(24px,3vw,48px)"><!-- HIDDEN until real testimonials are supplied: remove the hidden attribute, the nav link is hidden too -->
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow reveal">06 — Feedback</span>
@@ -1093,14 +1172,44 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
       </div>
       <button type="button" class="fb-close" id="fbCloseBtn" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
     </div>
-    <div class="fb-body">
-      <div class="fb-loading" id="fbLoading"><span class="spin"></span><span>Loading form…</span></div>
-      <div class="fb-fallback" id="fbFallback">
-        <i class="fa-regular fa-window-restore"></i>
-        <p>The form couldn't load in this window.</p>
-        <a class="btn btn-sm btn-primary" id="fbFallbackLink" href="#" target="_blank" rel="noopener">Open form in a new tab <span class="ico"><i class="fa-solid fa-arrow-up-right-from-square"></i></span></a>
+    <div class="fb-body fbf-body" id="fbBody">
+      <form class="fbf" id="fbForm" novalidate autocomplete="off">
+        <div class="fbf-row">
+          <div class="fbf-f"><label class="fbf-l" for="fbName">Name</label><input type="text" id="fbName" name="name" maxlength="80" placeholder="First name and initial" autocomplete="name" required><span class="fbf-msg">Please enter your name.</span></div>
+          <div class="fbf-f"><label class="fbf-l" for="fbRole">You are</label>
+            <select id="fbRole" name="role" required>
+              <option value="" selected disabled>Select</option>
+              <option>Learner</option><option>Trainer</option><option>Training manager</option><option>Colleague</option><option>Other</option>
+            </select><span class="fbf-msg">Please choose one.</span></div>
+        </div>
+        <div class="fbf-f"><label class="fbf-l" for="fbOrg">Center / organization <small>Optional</small></label><input type="text" id="fbOrg" name="org" maxlength="100" placeholder="Where we worked together" autocomplete="organization"></div>
+        <div class="fbf-f" id="fbRateWrap">
+          <span class="fbf-l" id="fbRateLbl">Overall experience</span>
+          <div class="fbf-stars" role="radiogroup" aria-labelledby="fbRateLbl" id="fbStars">
+            <button type="button" class="fbf-star" role="radio" aria-checked="false" aria-label="1 star" data-v="1"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="fbf-star" role="radio" aria-checked="false" aria-label="2 stars" data-v="2"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="fbf-star" role="radio" aria-checked="false" aria-label="3 stars" data-v="3"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="fbf-star" role="radio" aria-checked="false" aria-label="4 stars" data-v="4"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="fbf-star" role="radio" aria-checked="false" aria-label="5 stars" data-v="5"><i class="fa-solid fa-star"></i></button>
+            <span class="fbf-rtxt" id="fbRateTxt" aria-live="polite"></span>
+          </div>
+          <span class="fbf-msg">Please select a rating.</span>
+        </div>
+        <div class="fbf-f"><label class="fbf-l" for="fbMsg">Your feedback <small id="fbCount">0 / 1200</small></label><textarea id="fbMsg" name="message" maxlength="1200" placeholder="What stood out? What changed for you or your team?" required></textarea><span class="fbf-msg">Please write at least a few words.</span></div>
+        <div class="fbf-f"><label class="fbf-l" for="fbMail">Email <small>Optional · never published</small></label><input type="email" id="fbMail" name="email" maxlength="120" placeholder="name@example.com" autocomplete="email"><span class="fbf-msg">That email doesn’t look right.</span></div>
+        <label class="fbf-consent"><input type="checkbox" id="fbConsent" name="consent"><span class="fbf-box"><i class="fa-solid fa-check"></i></span><span><b>You may quote this on the website.</b> Only my name, role and center will appear — nothing is published without your review.</span></label>
+        <input type="text" class="fbf-hp" name="website" id="fbHp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="fbf-foot">
+          <div><div class="fbf-note"><i class="fa-solid fa-lock" aria-hidden="true"></i>Sent privately · takes under a minute</div><div class="fbf-status" id="fbStatus" role="status" aria-live="polite"></div></div>
+          <button type="submit" class="btn btn-primary" id="fbSubmit">Send feedback <span class="ico"><i class="fa-solid fa-arrow-right"></i></span></button>
+        </div>
+      </form>
+      <div class="fbf-done" id="fbDone" role="status">
+        <span class="fbf-done-ico"><i class="fa-solid fa-check"></i></span>
+        <h4>Thank you.</h4>
+        <p>Your feedback was sent — I read every message personally.</p>
+        <button type="button" class="btn btn-ghost btn-sm" id="fbDoneClose">Close</button>
       </div>
-      <iframe id="fbFrame" title="Feedback form" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
   </div>
 </div>
@@ -1119,7 +1228,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
           </div>
           <div class="c-actions">
             <a class="c-wa" href="https://wa.me/201032624932" target="_blank" rel="noopener" data-magnetic><i class="fa-brands fa-whatsapp"></i>WhatsApp</a>
-            <a class="c-link" href="https://www.linkedin.com/in/sohaila-ragab-3592161b7/" target="_blank" rel="noopener">LinkedIn <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:11px"></i></a>
+            <a class="c-link" href="https://www.linkedin.com/in/sohaila-ragab-3592161b7ab" target="_blank" rel="noopener">LinkedIn <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:11px"></i></a>
             <button type="button" class="c-copy" id="copyMail"><i class="fa-regular fa-copy"></i><span>Copy email</span></button>
           </div>
         </div>
@@ -1226,6 +1335,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
   const heights = [26,42,60,38,72,50,86,64,96,70,88,56,74,44,62,34,24];
   wave.innerHTML = heights.map((h, i) => `<i style="--h:${h}px;--d:${(i * -0.18).toFixed(2)}s"></i>`).join('');
 
+  /* German intro player */
   (() => {
     const audio = $('#vpAudio'), btn = $('#vpBtn'), voice = $('#voice'), time = $('#vpTime'), bars = [...wave.children], icon = btn.firstElementChild, FALLBACK = 30;
     const dur = () => (isFinite(audio.duration) && audio.duration > 0) ? audio.duration : FALLBACK;
@@ -1362,16 +1472,25 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
     auto = setInterval(() => { if (userTouched || ++k > 2) { clearInterval(auto); return; } go(k); }, 2600);
   }, { threshold: .5 }).observe($('#journeyBox'));
 
-  /* Order: 1 Manager/Supervisor · 2 Trainer (ToT) · 3 Learner · 4 Materials (only if clarified).
-     Replace each field with the ORIGINAL text, verbatim. Then remove `hidden` from #feedback and the nav link. */
+  /* Approved feedback — add only the entries you choose. Empty or placeholder entries keep the section hidden. */
   const FEEDBACK = [
-    { quote: "[Manager / Supervisor — original text]", name: "[First name + initial]", role: "[Training Manager]", org: "[Center name]" },
-    { quote: "[Trainer trained (ToT) — original text]", name: "[First name + initial]", role: "[Trainer]", org: "[Center name]" },
-    { quote: "[Learner — original text]", name: "[First name + initial]", role: "[Learner]", org: "[Center name]" }
+    // { quote: "Original text, verbatim", name: "First name + initial", role: "Training Manager", org: "Center name" },
   ];
+  const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const live = FEEDBACK.filter(f => f.quote && f.name && !/^\[/.test(f.quote.trim()));
   const fc = $('#fcats');
-  if (fc) {
-    fc.innerHTML = FEEDBACK.map((f, i) => `<figure class="fcard reveal" style="--d:${i * .08}s"><blockquote>${f.quote}</blockquote><figcaption><b>${f.name}</b><span>${f.role}</span><span>${f.org}</span></figcaption></figure>`).join('');
+  if (fc && live.length) {
+    fc.innerHTML = live.map((f, i) => `<figure class="fcard reveal" style="--d:${i * .08}s"><i class="fa-solid fa-quote-left" aria-hidden="true"></i><blockquote>${esc(f.quote)}</blockquote><figcaption><b>${esc(f.name)}</b>${f.role ? `<span>${esc(f.role)}</span>` : ''}${f.org ? `<span>${esc(f.org)}</span>` : ''}</figcaption></figure>`).join('');
+  }
+  if (fc && !live.length) {
+    $('#feedback').classList.add('is-empty');
+    fc.remove();
+    $('#feedback h2').innerHTML = 'Worked together? <em>Say a few words.</em>';
+    $('#feedback .lead').textContent = 'Managers, trainers and learners are welcome to share their experience — it takes under a minute.';
+    const b = $('#fbOpenBtn');
+    b.className = 'btn btn-primary';
+    b.innerHTML = 'Share feedback <span class="ico"><i class="fa-solid fa-arrow-right"></i></span>';
+    $('#feedback .fnote p').remove();
   }
   observeReveals();
 
@@ -1399,6 +1518,12 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
       setErr(n, !okN); setErr(m, !okM); setErr(g, !okG);
       if (!(okN && okM && okG)) { st.classList.add('bad'); st.textContent = 'Please complete the highlighted fields.'; return; }
       sb.disabled = true; st.textContent = 'Sending…';
+      if (/YOUR_FORM_ID/.test(cf.action)) {
+        const fd = new FormData(cf);
+        const body = `${fd.get('message')}\n\n— ${fd.get('name')} (${fd.get('role')})\n${fd.get('email')}`;
+        location.href = `mailto:sohailaragab238@gmail.com?subject=${encodeURIComponent('New enquiry — portfolio')}&body=${encodeURIComponent(body)}`;
+        cf.classList.add('sent'); cf.reset(); sb.disabled = false; return;
+      }
       try {
         const r = await fetch(cf.action, { method: 'POST', body: new FormData(cf), headers: { Accept: 'application/json' } });
         if (!r.ok) throw 0;
@@ -1539,42 +1664,101 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
 
   (() => {
     const overlay = $('#fbOverlay'), openBtn = $('#fbOpenBtn'), closeBtn = $('#fbCloseBtn');
-    const frame = $('#fbFrame'), loading = $('#fbLoading');
-    const fallback = $('#fbFallback'), fallbackLink = $('#fbFallbackLink');
-    if (!overlay || !openBtn) return;
-    const NOTION_URL = 'https://drislambinalkhattab.notion.site/ebd//6c89c5e9bf7246fcab8c9a9b6f7ae52d';
-    if (fallbackLink) fallbackLink.href = NOTION_URL;
-    let loaded = false, lastFocus = null, blockTimer = null;
+    const body = $('#fbBody'), form = $('#fbForm'), status = $('#fbStatus'), submit = $('#fbSubmit');
+    if (!overlay || !openBtn || !form) return;
 
+    /* Paste the Apps Script Web App deployment ID here (the part between /s/ and /exec). */
+    const FB_ID = 'PASTE_DEPLOYMENT_ID';
+    const endpoint = () => 'https://script.google.com/macros/s/' + FB_ID + '/exec';
+
+    let lastFocus = null, openedAt = 0, rating = 0;
+    const stars = $$('.fbf-star', form), rtxt = $('#fbRateTxt'), msg = $('#fbMsg'), count = $('#fbCount');
+    const labels = ['', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent'];
+    const paint = v => stars.forEach(b => { const on = +b.dataset.v <= v; b.classList.toggle('on', on); });
+    const setRating = v => {
+      rating = v; paint(v); rtxt.textContent = labels[v] || '';
+      stars.forEach(b => { b.setAttribute('aria-checked', String(+b.dataset.v === v)); b.tabIndex = (+b.dataset.v === (v || 1)) ? 0 : -1; });
+      $('#fbRateWrap').classList.remove('err');
+    };
+    stars.forEach(b => {
+      b.addEventListener('mouseenter', () => { paint(+b.dataset.v); rtxt.textContent = labels[+b.dataset.v]; });
+      b.addEventListener('click', () => setRating(+b.dataset.v));
+      b.addEventListener('keydown', e => {
+        const k = e.key; let v = rating || 0;
+        if (k === 'ArrowRight' || k === 'ArrowUp') v = Math.min(5, v + 1);
+        else if (k === 'ArrowLeft' || k === 'ArrowDown') v = Math.max(1, v - 1);
+        else return;
+        e.preventDefault(); setRating(v); stars[v - 1].focus();
+      });
+    });
+    $('#fbStars').addEventListener('mouseleave', () => { paint(rating); rtxt.textContent = labels[rating] || ''; });
+    stars.forEach((b, i) => b.tabIndex = i === 0 ? 0 : -1);
+
+    msg.addEventListener('input', () => { count.textContent = msg.value.length + ' / 1200'; });
+    const fld = el => el.closest('.fbf-f');
+    $$('input,select,textarea', form).forEach(el => ['input', 'change'].forEach(ev => el.addEventListener(ev, () => { const f = fld(el); if (f) f.classList.remove('err'); })));
+
+    const reset = () => {
+      form.reset(); setRating(0); count.textContent = '0 / 1200';
+      status.textContent = ''; status.className = 'fbf-status'; body.classList.remove('sent'); submit.disabled = false;
+      $$('.fbf-f', form).forEach(f => f.classList.remove('err'));
+    };
     const open = () => {
-      lastFocus = document.activeElement;
-      if (!loaded) {
-        frame.src = NOTION_URL;
-        loaded = true;
-        frame.addEventListener('load', () => {
-          frame.classList.add('ready');
-          loading.classList.add('hide');
-        }, { once: true });
-        
-        blockTimer = setTimeout(() => {
-          if (!frame.classList.contains('ready')) {
-            loading.classList.add('hide');
-            fallback.classList.add('show');
-          }
-        }, 4500);
-      }
+      lastFocus = document.activeElement; openedAt = Date.now();
       overlay.classList.add('open');
       document.body.classList.add('fb-lock');
-      requestAnimationFrame(() => closeBtn.focus());
+      requestAnimationFrame(() => ($('#fbName') || closeBtn).focus({ preventScroll: true }));
     };
     const close = () => {
       overlay.classList.remove('open');
       document.body.classList.remove('fb-lock');
+      if (body.classList.contains('sent')) setTimeout(reset, 500);
       if (lastFocus && lastFocus.focus) lastFocus.focus();
     };
 
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      status.className = 'fbf-status'; status.textContent = '';
+      const d = {
+        name: $('#fbName').value.trim(), role: $('#fbRole').value, org: $('#fbOrg').value.trim(),
+        rating, message: msg.value.trim(), email: $('#fbMail').value.trim(),
+        consent: $('#fbConsent').checked ? 'Yes' : 'No', website: $('#fbHp').value, t: Date.now() - openedAt
+      };
+      const bad = {
+        name: d.name.length < 2, role: !d.role, rate: !rating, msg: d.message.length < 5,
+        mail: d.email !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)
+      };
+      fld($('#fbName')).classList.toggle('err', bad.name);
+      fld($('#fbRole')).classList.toggle('err', bad.role);
+      $('#fbRateWrap').classList.toggle('err', bad.rate);
+      fld(msg).classList.toggle('err', bad.msg);
+      fld($('#fbMail')).classList.toggle('err', bad.mail);
+      if (Object.values(bad).some(Boolean)) {
+        status.classList.add('bad'); status.textContent = 'Please complete the highlighted fields.';
+        const first = $('.fbf-f.err', form); if (first) first.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+        return;
+      }
+      try { if (Date.now() - (+localStorage.getItem('fbLast') || 0) < 45000) { status.classList.add('bad'); status.textContent = 'Already sent — thank you. Please wait a moment before sending another.'; return; } } catch (_) {}
+
+      submit.disabled = true; status.textContent = 'Sending…';
+      try {
+        if (/PASTE_DEPLOYMENT_ID/.test(FB_ID)) {
+          const txt = `${d.message}\n\n— ${d.name} (${d.role}${d.org ? ', ' + d.org : ''})\nRating: ${d.rating}/5\nMay quote: ${d.consent}`;
+          location.href = 'mailto:sohailaragab238@gmail.com?subject=' + encodeURIComponent('Feedback — portfolio') + '&body=' + encodeURIComponent(txt);
+        } else {
+          await fetch(endpoint(), { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(d) });
+        }
+        try { localStorage.setItem('fbLast', String(Date.now())); } catch (_) {}
+        body.classList.add('sent'); body.scrollTop = 0;
+      } catch (_) {
+        status.classList.add('bad'); status.textContent = 'Couldn’t send right now — please try again, or email me directly.';
+        submit.disabled = false;
+      }
+    });
+
     openBtn.addEventListener('click', open);
     closeBtn.addEventListener('click', close);
+    $('#fbDoneClose').addEventListener('click', close);
     overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && overlay.classList.contains('open')) close();
