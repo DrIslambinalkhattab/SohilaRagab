@@ -1512,7 +1512,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
   const live = list.filter(f => f.quote && f.name);
   if (fc && live.length) {
     const TRUNC_AT = 75;
-    const items = live.map(f => ({ quote: String(f.quote), name: String(f.name), role: [f.role, f.org].filter(Boolean).join(' · '), icon: f.icon || 'fa-quote-left', cat: f.cat || f.category || '' }));
+    const items = live.map(f => ({ quote: String(f.quote), name: String(f.name), role: [f.role, f.course].filter(Boolean).join(' · '), icon: f.icon || 'fa-quote-left', cat: f.cat || f.category || '' }));
     const chip = (f, i, tab) => {
       const q = f.quote, head = `<div class="fchip"><i class="fa-solid ${esc(f.icon)}" aria-hidden="true"></i>`, foot = `<footer><b>${esc(f.name)}</b>${f.role ? `<span>${esc(f.role)}</span>` : ''}</footer></div>`;
       if (q.length <= TRUNC_AT) return `${head}<p dir="auto">${esc(q)}</p>${foot}`;
